@@ -8,8 +8,10 @@
     "jquery": "^3.4.1",
     "merge": "^1.2.1",
     "oidc-client": "^1.9.0",
+    "prop-types": "^15.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-icons": "^3.10.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
@@ -19,13 +21,16 @@
   "devDependencies": {
     "ajv": "^6.9.1",
     "cross-env": "^5.2.0",
-    "typescript": "^3.7.5",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.2.0",
     "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.18.3"
+    "eslint-plugin-react": "^7.18.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.4",
+    "prettier": "^2.0.5",
+    "typescript": "^3.7.5"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,7 +40,9 @@
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "format-check": "prettier --check src/**/*.js",
+    "format": "prettier --write src/**/*.js"
   },
   "browserslist": {
     "production": [
@@ -47,6 +54,17 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
     ]
   }
 }

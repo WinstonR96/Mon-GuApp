@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Service from './../Services/Service';
+import React, { Component } from "react";
+import Service from "./../Services/Service";
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -15,7 +15,7 @@ export class FetchData extends Component {
 
   static renderForecastsTable(forecasts) {
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
+      <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
           <tr>
             <th>Date</th>
@@ -25,27 +25,31 @@ export class FetchData extends Component {
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
+          {forecasts.map((forecast) => (
             <tr key={forecast.date}>
               <td>{forecast.date}</td>
               <td>{forecast.temperatureC}</td>
               <td>{forecast.temperatureF}</td>
               <td>{forecast.summary}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     );
   }
 
   render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+    let contents = this.state.loading ? (
+      <p>
+        <em>Loading...</em>
+      </p>
+    ) : (
+      FetchData.renderForecastsTable(this.state.forecasts)
+    );
 
     return (
       <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
+        <h1 id="tabelLabel">Weather forecast</h1>
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>
@@ -53,9 +57,8 @@ export class FetchData extends Component {
   }
 
   async populateWeatherData() {
-    Service.get('weatherforecast')
-      .then(forecasts =>
-        this.setState({forecasts, loading:false})
-      ).catch(err => console.log("error", err));
+    Service.get("weatherforecast")
+      .then((forecasts) => this.setState({ forecasts, loading: false }))
+      .catch((err) => console.log("error", err));
   }
 }
