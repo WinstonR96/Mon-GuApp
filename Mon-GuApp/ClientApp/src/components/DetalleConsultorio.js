@@ -24,10 +24,19 @@ export class DetalleConsultorio extends Component {
       consultorio,
     });
   }
+
+  getProp = (obj, key) =>
+    key
+      .split(".")
+      .reduce(
+        (o, x) => (typeof o == "undefined" || o === null ? o : o[x]),
+        obj
+      );
+
   render() {
     const { consultorio } = this.state;
-    console.log("consultorio", consultorio);
-    console.log("paciente", consultorio.paciente.id);
+    let pacienteId = this.getProp(consultorio, "paciente.triage");
+    console.log("Paciente ID", pacienteId);
     return (
       <div>
         <Card>
