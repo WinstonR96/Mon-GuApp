@@ -1,0 +1,18 @@
+[
+  {
+    "id":"1",
+    "nombre":"John Does",
+    "edad": "20",
+    "sexo": "M",
+    "triage": "Urgencia menor",
+    "sintomas": "lorempisjdsdj"
+  },
+  {
+    "id":"2",
+    "nombre":"Jennifr Does",
+    "edad": "30",
+    "sexo": "F",
+    "triage": "Urgencia menor",
+    "sintomas": "lorempisjdsdj"
+  }
+]

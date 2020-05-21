@@ -14,6 +14,22 @@ import { FaDoorClosed } from "react-icons/fa";
 export class Home extends Component {
   static displayName = Home.name;
 
+  constructor(props) {
+    super(props);
+  }
+
+  Paciente = () => {
+    this.props.history.push({
+      pathname: "/paciente",
+    });
+  };
+
+  Consultorio = () => {
+    this.props.history.push({
+      pathname: "/consultorio",
+    });
+  };
+
   render() {
     return (
       <div>
@@ -25,7 +41,7 @@ export class Home extends Component {
                 <ToastHeader>Pacientes</ToastHeader>
                 <ToastBody>
                   <center>
-                    <Button outline color="secondary">
+                    <Button outline color="secondary" onClick={this.Paciente}>
                       <BsFillPersonFill size={"3em"} />
                     </Button>
                   </center>
@@ -37,7 +53,11 @@ export class Home extends Component {
                 <ToastHeader>Consultorios</ToastHeader>
                 <ToastBody>
                   <center>
-                    <Button outline color="secondary">
+                    <Button
+                      outline
+                      color="secondary"
+                      onClick={this.Consultorio}
+                    >
                       <FaDoorClosed size={"3em"} />
                     </Button>
                   </center>

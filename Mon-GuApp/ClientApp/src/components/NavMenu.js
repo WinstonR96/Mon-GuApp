@@ -38,7 +38,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              Mon_GuApp
+              MonGuApp
             </NavbarBrand>
             {/* <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse

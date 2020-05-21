@@ -61,7 +61,6 @@ export class Login extends Component {
                   type="number"
                   name="cedula"
                   id="cedula"
-                  placeholder="1045987456"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>
@@ -73,7 +72,6 @@ export class Login extends Component {
                   type="password"
                   name="password"
                   id="examplePassword"
-                  placeholder="********"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>
