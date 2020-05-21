@@ -1,0 +1,21 @@
+[
+  {
+    "codigo":"1",
+    "medico":"Fulano",
+    "estado":"Ocupado",
+    "paciente": {
+      "id":"1",
+      "nombre":"John Does",
+      "edad": "20",
+      "sexo": "M",
+      "triage": "Urgencia menor",
+      "sintomas": "lorempisjdsdj"
+    }
+  },
+  {
+    "codigo":"2",
+    "medico":"Fulano 2",
+    "estado":"Disponible",
+    "paciente": null
+  }
+]

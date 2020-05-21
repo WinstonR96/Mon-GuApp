@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 
 export class NewPaciente extends Component {
+  static displayname = NewPaciente.name;
   constructor(props) {
     super(props);
 
