@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Service from './../Services/Service';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -52,8 +53,9 @@ export class FetchData extends Component {
   }
 
   async populateWeatherData() {
-    const response = await fetch('weatherforecast');
-    const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
+    Service.get('weatherforecast')
+      .then(forecasts =>
+        this.setState({forecasts, loading:false})
+      ).catch(err => console.log("error", err));
   }
 }
