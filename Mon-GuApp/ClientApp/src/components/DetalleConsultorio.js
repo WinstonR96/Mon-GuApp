@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Card, CardBody, Button } from "reactstrap";
 import consultorios from "./consultorio.json";
 
 export class DetalleConsultorio extends Component {
@@ -24,6 +25,23 @@ export class DetalleConsultorio extends Component {
     });
   }
   render() {
-    return <div>{this.state.consultorio.estado}</div>;
+    const { consultorio } = this.state;
+    console.log("consultorio", consultorio);
+    console.log("paciente", consultorio.paciente.id);
+    return (
+      <div>
+        <Card>
+          <CardBody>
+            <h3>Consultorio Nro: {this.state.consultorio.codigo}</h3>
+            <h3>Medico a cargo: {this.state.consultorio.medico}</h3>
+            {/* {this.state.consultorio.estado === "Disponible" ?
+        <Button>Llamar paciente</Button>
+        :
+        <h3>Paciente: {this.state.consultorio.paciente}</h3>} */}
+          </CardBody>
+        </Card>
+        {this.state.consultorio.estado}
+      </div>
+    );
   }
 }

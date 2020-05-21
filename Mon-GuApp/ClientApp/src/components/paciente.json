@@ -4,7 +4,7 @@
     "nombre":"John Does",
     "edad": "20",
     "sexo": "M",
-    "triage": "Urgencia menor",
+    "triage": "1",
     "sintomas": "lorempisjdsdj"
   },
   {
@@ -12,7 +12,7 @@
     "nombre":"Jennifr Does",
     "edad": "30",
     "sexo": "F",
-    "triage": "Urgencia menor",
+    "triage": "2",
     "sintomas": "lorempisjdsdj"
   }
 ]
