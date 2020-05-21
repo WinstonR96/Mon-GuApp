@@ -40,7 +40,7 @@ export class NavMenu extends Component {
             <NavbarBrand tag={Link} to="/">
               Mon_GuApp
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            {/* <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
               className="d-sm-inline-flex flex-sm-row-reverse"
               isOpen={!this.state.collapsed}
@@ -63,7 +63,7 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
               </ul>
-            </Collapse>
+            </Collapse> */}
           </Container>
         </Navbar>
       </header>
