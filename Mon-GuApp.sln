@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mon-GuApp", "Mon-GuApp\Mon-GuApp.csproj", "{D189ADBE-8232-42F7-97D4-7C052C2D0A21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D189ADBE-8232-42F7-97D4-7C052C2D0A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D189ADBE-8232-42F7-97D4-7C052C2D0A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D189ADBE-8232-42F7-97D4-7C052C2D0A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D189ADBE-8232-42F7-97D4-7C052C2D0A21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {799D342C-F853-4AF9-B32E-99E5A4292C06}
+	EndGlobalSection
+EndGlobal
