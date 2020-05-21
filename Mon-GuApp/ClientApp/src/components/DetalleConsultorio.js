@@ -25,6 +25,16 @@ export class DetalleConsultorio extends Component {
     });
   }
 
+  DetallePaciente = () => {
+    const { consultorio } = this.state;
+    let pacienteId = this.getProp(consultorio, "paciente.id");
+    console.log("Detalle consultorio: ", consultorio, pacienteId);
+    this.props.history.push({
+      pathname: "/paciente/detalle",
+      state: { pacienteId },
+    });
+  };
+
   getProp = (obj, key) =>
     key
       .split(".")
@@ -35,21 +45,28 @@ export class DetalleConsultorio extends Component {
 
   render() {
     const { consultorio } = this.state;
-    let pacienteId = this.getProp(consultorio, "paciente.triage");
-    console.log("Paciente ID", pacienteId);
+    let pacienteNombre = this.getProp(consultorio, "paciente.nombre");
+    let pacienteId = this.getProp(consultorio, "paciente.id");
+    console.log("consultorio", consultorio);
+    console.log("Id", pacienteId);
     return (
       <div>
         <Card>
           <CardBody>
             <h3>Consultorio Nro: {this.state.consultorio.codigo}</h3>
             <h3>Medico a cargo: {this.state.consultorio.medico}</h3>
-            {/* {this.state.consultorio.estado === "Disponible" ?
-        <Button>Llamar paciente</Button>
-        :
-        <h3>Paciente: {this.state.consultorio.paciente}</h3>} */}
+            {consultorio.estado === "Disponible" ? (
+              <Button>Llamar paciente</Button>
+            ) : (
+              <div>
+                <h3>Paciente: {pacienteNombre}</h3>
+                <Button onClick={this.DetallePaciente}>
+                  Ver Historia paciente
+                </Button>
+              </div>
+            )}
           </CardBody>
         </Card>
-        {this.state.consultorio.estado}
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Paciente } from "./components/Paciente";
 import { NewPaciente } from "./components/NewPaciente";
+import { HistoriaPaciente } from "./components/HistoriaPaciente";
 import { Consultorio } from "./components/Consultorio";
 import { DetalleConsultorio } from "./components/DetalleConsultorio";
 import { FetchData } from "./components/FetchData";
@@ -22,6 +23,7 @@ export default class App extends Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/paciente" component={Paciente} />
         <Route exact path="/paciente/nuevo" component={NewPaciente} />
+        <Route exact path="/paciente/detalle" component={HistoriaPaciente} />
         <Route exact path="/consultorio" component={Consultorio} />
         <Route
           exact
