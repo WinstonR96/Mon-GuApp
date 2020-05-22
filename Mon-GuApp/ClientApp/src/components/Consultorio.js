@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Table } from "reactstrap";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import consultorios from "./consultorio.json";
 
@@ -24,6 +24,10 @@ export class Consultorio extends Component {
     this.props.history.push({
       pathname: "/consultorio/nuevo",
     });
+  };
+
+  EliminarConsultorio = (codigo) => {
+    console.log("Eliminando", codigo);
   };
 
   render() {
@@ -65,7 +69,21 @@ export class Consultorio extends Component {
                 <td>{consultorio.Estado}</td>
                 {consultorio.Paciente ? (
                   <td>{consultorio.Paciente.Nombres}</td>
-                ) : null}
+                ) : (
+                  <td></td>
+                )}
+                <td>
+                  <Button
+                    outline
+                    color="secondary"
+                    onClick={this.EliminarConsultorio.bind(
+                      this,
+                      consultorio.Codigo
+                    )}
+                  >
+                    <AiFillDelete />
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, CardBody, Button } from "reactstrap";
+import Util from "./../Helper/Util";
 import consultorios from "./consultorio.json";
 
 export class DetalleConsultorio extends Component {
@@ -27,7 +28,7 @@ export class DetalleConsultorio extends Component {
 
   DetallePaciente = () => {
     const { consultorio } = this.state;
-    let pacienteId = this.getProp(consultorio, "Paciente.Id");
+    let pacienteId = Util.getProp(consultorio, "Paciente.Id");
     console.log("Detalle consultorio: ", consultorio, pacienteId);
     this.props.history.push({
       pathname: "/paciente/detalle",
@@ -35,18 +36,10 @@ export class DetalleConsultorio extends Component {
     });
   };
 
-  getProp = (obj, key) =>
-    key
-      .split(".")
-      .reduce(
-        (o, x) => (typeof o == "undefined" || o === null ? o : o[x]),
-        obj
-      );
-
   render() {
     const { consultorio } = this.state;
-    let pacienteNombre = this.getProp(consultorio, "Paciente.nombres");
-    let pacienteId = this.getProp(consultorio, "Paciente.Id");
+    let pacienteNombre = Util.getProp(consultorio, "Paciente.Nombres");
+    let pacienteId = Util.getProp(consultorio, "Paciente.Id");
     console.log("consultorio", consultorio);
     console.log("Id", pacienteId);
     return (
