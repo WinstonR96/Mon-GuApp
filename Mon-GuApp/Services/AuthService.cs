@@ -1,9 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
 using Mon_GuApp.Models;
 using Mon_GuApp.Models.DTOs.Request;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -16,12 +18,43 @@ namespace Mon_GuApp.Services
     {
         public Medico Authenticate(LoginRequestDTO data, out bool exito)
         {
-            User user = new User() {Cedula="1",Password="1"};
-            Medico medico = new Medico() { Cedula = "1", Id = "1", Nombres = "John Does", User = user };
-            if (data.User.Cedula.Equals(medico.User.Cedula) && data.User.Password.Equals(medico.User.Password))
+            User user = new User();
+            Medico medico = new Medico();
+            using (var ctx = DbContext.GetInstance())
             {
-                exito = true;
-                return medico;
+                SQLiteCommand consultarUsuario = new SQLiteCommand();
+                consultarUsuario.Connection = ctx;
+                consultarUsuario.CommandText = "SELECT * FROM User WHERE Cedula = @Cedula AND Password = @Password";
+                consultarUsuario.Parameters.AddWithValue("@Cedula", data.User.Cedula);
+                consultarUsuario.Parameters.AddWithValue("@Password", Utils.GetSHA256(data.User.Password));
+                using (var readerUser = consultarUsuario.ExecuteReader())
+                {
+                    if (readerUser.HasRows)
+                    {
+                        while (readerUser.Read())
+                        {
+                            user.Id = Convert.ToInt32(readerUser["Id"].ToString());
+                        }
+                    }
+                }
+                SQLiteCommand consultarMedico = new SQLiteCommand();
+                consultarMedico.Connection = ctx;
+                consultarMedico.CommandText = "SELECT * FROM Medico WHERE Id_user = @Id_user";
+                consultarMedico.Parameters.AddWithValue("@Id_user", user.Id);
+                using (var readerMedico = consultarMedico.ExecuteReader())
+                {
+                    if (readerMedico.HasRows)
+                    {
+                        while (readerMedico.Read())
+                        {
+                            medico.Id = Convert.ToInt32(readerMedico["Id"].ToString());
+                            medico.Nombres = readerMedico["Nombres"].ToString();
+                            medico.Cedula = readerMedico["Cedula"].ToString();
+                        }
+                        exito = true;
+                        return medico;
+                    }
+                }
             }
             exito = false;
             return null;

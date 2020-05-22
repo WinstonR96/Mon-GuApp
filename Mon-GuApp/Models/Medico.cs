@@ -7,7 +7,7 @@ namespace Mon_GuApp.Models
 {
     public class Medico
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Nombres { get; set; }
         public string Cedula { get; set; }
         public User User { get; set; }

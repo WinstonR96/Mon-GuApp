@@ -19,6 +19,18 @@
             Configura log con nombre de archivo
             </summary>
         </member>
+        <member name="T:Mon_GuApp.Helpers.Utils">
+            <summary>
+            Clase Utils, Helper que contiene metodos de uso general
+            </summary>
+        </member>
+        <member name="M:Mon_GuApp.Helpers.Utils.GetSHA256(System.String)">
+            <summary>
+            Genera SHA256 de un string
+            </summary>
+            <param name="str">Cadena a encriptar</param>
+            <returns>retorna Hash de la cadena</returns>
+        </member>
         <member name="M:Mon_GuApp.Interfaces.IAuthService.Authenticate(Mon_GuApp.Models.DTOs.Request.LoginRequestDTO,System.Boolean@)">
             <summary>
             Metodo para realizar la autenticacion del usuario
