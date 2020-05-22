@@ -1,18 +1,18 @@
 [
   {
-    "id":"1",
-    "nombre":"John Does",
-    "edad": "20",
-    "sexo": "M",
-    "triage": "1",
-    "sintomas": "lorempisjdsdj"
+    "Id": "1",
+    "Nombres": "John Does",
+    "Edad": "20",
+    "Sexo": "M",
+    "Triage": "1",
+    "Sintomas": "lorempisjdsdj"
   },
   {
-    "id":"2",
-    "nombre":"Jennifr Does",
-    "edad": "30",
-    "sexo": "F",
-    "triage": "2",
-    "sintomas": "lorempisjdsdj"
+    "Id": "2",
+    "Nombres": "Jennifr Does",
+    "Edad": "30",
+    "Sexo": "F",
+    "Triage": "2",
+    "Sintomas": "lorempisjdsdj"
   }
 ]

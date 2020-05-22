@@ -42,7 +42,7 @@ export class Consultorio extends Component {
         <Table>
           <thead>
             <tr>
-              <th>codigo</th>
+              <th>Codigo</th>
               <th>Medico</th>
               <th>Estado</th>
               <th>Paciente</th>
@@ -55,16 +55,16 @@ export class Consultorio extends Component {
                   <Link
                     to={{
                       pathname: "consultorio/detalle",
-                      state: { codigo: consultorio.codigo },
+                      state: { Codigo: consultorio.Codigo },
                     }}
                   >
-                    {consultorio.codigo}
+                    {consultorio.Codigo}
                   </Link>
                 </td>
-                <td>{consultorio.medico}</td>
-                <td>{consultorio.estado}</td>
-                {consultorio.paciente ? (
-                  <td>{consultorio.paciente.nombre}</td>
+                <td>{consultorio.Medico}</td>
+                <td>{consultorio.Estado}</td>
+                {consultorio.Paciente ? (
+                  <td>{consultorio.Paciente.Nombres}</td>
                 ) : null}
               </tr>
             ))}

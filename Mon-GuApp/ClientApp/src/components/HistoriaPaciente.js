@@ -19,7 +19,7 @@ export class HistoriaPaciente extends Component {
 
   CargarPaciente() {
     let paciente = pacientes.find(
-      (c) => c.id === this.props.location.state.pacienteId
+      (c) => c.Id === this.props.location.state.pacienteId
     );
     this.setState({
       paciente,
@@ -29,6 +29,6 @@ export class HistoriaPaciente extends Component {
   render() {
     const { paciente } = this.state;
     console.log("Paciente", paciente);
-    return <div>Historia del paciente: {paciente.nombre}</div>;
+    return <div>Historia del paciente: {paciente.Nombres}</div>;
   }
 }

@@ -15,12 +15,12 @@ export class NewPaciente extends Component {
     super(props);
 
     this.state = {
-      id: "",
-      nombre: "",
-      edad: "",
-      sexo: "",
-      triage: "",
-      sintomas: "",
+      Id: "",
+      Nombres: "",
+      Edad: "",
+      Sexo: "",
+      Triage: "",
+      Sintomas: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,7 +37,7 @@ export class NewPaciente extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(this.state.triage);
+    console.log(this.state.Triage);
   }
 
   render() {
@@ -51,41 +51,41 @@ export class NewPaciente extends Component {
                 <Label>Cedúla</Label>
                 <Input
                   type="number"
-                  name="id"
-                  id="id"
+                  name="Id"
+                  id="Id"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
-                <Label for="nombre">Nombres</Label>
+                <Label for="Nombres">Nombres</Label>
                 <Input
                   type="text"
-                  name="nombre"
-                  id="nombre"
+                  name="Nombres"
+                  id="Nombres"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
-                <Label for="edad">Edad</Label>
+                <Label for="Edad">Edad</Label>
                 <Input
                   type="number"
-                  name="edad"
-                  id="edad"
+                  name="Edad"
+                  id="Edad"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>
             </Col>
             <Col>
               <FormGroup>
-                <Label for="sexo">Genero</Label>
+                <Label for="Sexo">Genero</Label>
                 <Input
                   type="select"
-                  name="sexo"
-                  id="sexo"
+                  name="Sexo"
+                  id="Sexo"
                   onChange={(e) => this.handleChange(e)}
                 >
                   <option value="0">Seleccione...</option>
@@ -97,11 +97,11 @@ export class NewPaciente extends Component {
             </Col>
             <Col>
               <FormGroup>
-                <Label for="triage">Triage</Label>
+                <Label for="Triage">Triage</Label>
                 <Input
                   type="select"
-                  name="triage"
-                  id="triage"
+                  name="Triage"
+                  id="Triage"
                   onChange={(e) => this.handleChange(e)}
                 >
                   <option value="0">Seleccione...</option>
@@ -114,11 +114,11 @@ export class NewPaciente extends Component {
             </Col>
             <Col>
               <FormGroup>
-                <Label for="sintomas">Sintomas</Label>
+                <Label for="Sintomas">Sintomas</Label>
                 <Input
                   type="text"
-                  name="sintomas"
-                  id="sintomas"
+                  name="Sintomas"
+                  id="Sintomas"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>

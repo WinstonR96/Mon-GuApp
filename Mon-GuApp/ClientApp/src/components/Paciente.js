@@ -42,22 +42,22 @@ export class Paciente extends Component {
           <thead>
             <tr>
               <th>Identificacion</th>
-              <th>nombre</th>
-              <th>edad</th>
-              <th>sexo</th>
-              <th>triage</th>
-              <th>sintomas</th>
+              <th>Nombres</th>
+              <th>Edad</th>
+              <th>Sexo</th>
+              <th>Triage</th>
+              <th>Sintomas</th>
             </tr>
           </thead>
           <tbody>
             {this.state.pacientes.map((paciente) => (
               <tr>
-                <td>{paciente.id}</td>
-                <td>{paciente.nombre}</td>
-                <td>{paciente.edad}</td>
-                <td>{paciente.sexo}</td>
-                <td>{paciente.triage}</td>
-                <td>{paciente.sintomas}</td>
+                <td>{paciente.Id}</td>
+                <td>{paciente.Nombres}</td>
+                <td>{paciente.Edad}</td>
+                <td>{paciente.Sexo}</td>
+                <td>{paciente.Triage}</td>
+                <td>{paciente.Sintomas}</td>
               </tr>
             ))}
           </tbody>

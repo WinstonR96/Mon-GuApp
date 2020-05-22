@@ -18,7 +18,7 @@ export class DetalleConsultorio extends Component {
 
   CargarConsultorio() {
     let consultorio = consultorios.find(
-      (c) => c.codigo === this.props.location.state.codigo
+      (c) => c.Codigo === this.props.location.state.Codigo
     );
     this.setState({
       consultorio,
@@ -27,7 +27,7 @@ export class DetalleConsultorio extends Component {
 
   DetallePaciente = () => {
     const { consultorio } = this.state;
-    let pacienteId = this.getProp(consultorio, "paciente.id");
+    let pacienteId = this.getProp(consultorio, "Paciente.Id");
     console.log("Detalle consultorio: ", consultorio, pacienteId);
     this.props.history.push({
       pathname: "/paciente/detalle",
@@ -45,17 +45,17 @@ export class DetalleConsultorio extends Component {
 
   render() {
     const { consultorio } = this.state;
-    let pacienteNombre = this.getProp(consultorio, "paciente.nombre");
-    let pacienteId = this.getProp(consultorio, "paciente.id");
+    let pacienteNombre = this.getProp(consultorio, "Paciente.nombres");
+    let pacienteId = this.getProp(consultorio, "Paciente.Id");
     console.log("consultorio", consultorio);
     console.log("Id", pacienteId);
     return (
       <div>
         <Card>
           <CardBody>
-            <h3>Consultorio Nro: {this.state.consultorio.codigo}</h3>
-            <h3>Medico a cargo: {this.state.consultorio.medico}</h3>
-            {consultorio.estado === "Disponible" ? (
+            <h3>Consultorio Nro: {this.state.consultorio.Codigo}</h3>
+            <h3>Medico a cargo: {this.state.consultorio.Medico}</h3>
+            {consultorio.Estado === "Disponible" ? (
               <Button>Llamar paciente</Button>
             ) : (
               <div>
