@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import { Container, Navbar, NavbarBrand } from "reactstrap";
+import {
+  Container,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+  Collapse,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
+import Util from "./../Helper/Util";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -12,13 +21,31 @@ export class NavMenu extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true,
+      active: false,
     };
+  }
+
+  componentDidMount() {
+    let result = this.comprobarSesion();
+    if (result) {
+      this.setState({
+        active: true,
+      });
+    }
   }
 
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
+  }
+
+  comprobarSesion() {
+    return Util.ComprobarSesionActiva();
+  }
+
+  CerrarSesion() {
+    Util.CerrarSesion();
   }
 
   render() {
@@ -38,23 +65,26 @@ export class NavMenu extends Component {
               isOpen={!this.state.collapsed}
               navbar
             >
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">
-                    Home
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">
-                    Counter
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">
-                    Fetch data
-                  </NavLink>
-                </NavItem>
-              </ul>
+              {this.state.active ? (
+                <ul className="navbar-nav flex-grow">
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/home">
+                      Home
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem>
+                    <NavLink
+                      tag={Link}
+                      className="text-dark"
+                      to="/"
+                      onClick={this.CerrarSesion}
+                    >
+                      Cerrar Sesion
+                    </NavLink>
+                  </NavItem>
+                </ul>
+              ) : null}
             </Collapse> */}
           </Container>
         </Navbar>

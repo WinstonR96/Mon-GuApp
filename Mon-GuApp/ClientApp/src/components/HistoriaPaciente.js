@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import { AiFillAlert, AiFillAliwangwang, AiFillPushpin } from "react-icons/ai";
 import pacientes from "./paciente.json";
+import Util from "./../Helper/Util";
 
 export class HistoriaPaciente extends Component {
   static displayname = HistoriaPaciente.name;
@@ -47,7 +48,19 @@ export class HistoriaPaciente extends Component {
   }
 
   componentDidMount() {
-    this.CargarPaciente();
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    } else {
+      this.CargarPaciente();
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   CargarPaciente() {

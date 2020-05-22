@@ -5,6 +5,7 @@
     "Estado": "Ocupado",
     "Paciente": {
       "Id": "1",
+      "Cedula": "1",
       "Nombres": "John Does",
       "Edad": "20",
       "Sexo": "M",

@@ -14,7 +14,19 @@ export class DetalleConsultorio extends Component {
   }
 
   componentDidMount() {
-    this.CargarConsultorio();
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    } else {
+      this.CargarConsultorio();
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   CargarConsultorio() {

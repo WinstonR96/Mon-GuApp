@@ -8,6 +8,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import Util from "./../Helper/Util";
 
 export class NewPaciente extends Component {
   static displayname = NewPaciente.name;
@@ -15,7 +16,7 @@ export class NewPaciente extends Component {
     super(props);
 
     this.state = {
-      Id: "",
+      Cedula: "",
       Nombres: "",
       Edad: "",
       Sexo: "",
@@ -24,6 +25,20 @@ export class NewPaciente extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   handleChange = async (event) => {
@@ -51,8 +66,8 @@ export class NewPaciente extends Component {
                 <Label>Cedúla</Label>
                 <Input
                   type="number"
-                  name="Id"
-                  id="Id"
+                  name="Cedula"
+                  id="Cedula"
                   onChange={(e) => this.handleChange(e)}
                 />
               </FormGroup>

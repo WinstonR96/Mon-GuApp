@@ -4,5 +4,55 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
+        <member name="P:Mon_GuApp.Helpers.LoggerApp.GetLogger">
+            <summary>
+            Obtiene la instancia actual
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Helpers.LoggerApp.Instance">
+            <summary>
+            Obtiene la instancia actual de la clase.
+            </summary>
+        </member>
+        <member name="M:Mon_GuApp.Helpers.LoggerApp.#ctor(System.String)">
+            <summary>
+            Configura log con nombre de archivo
+            </summary>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IAuthService.Authenticate(Mon_GuApp.Models.DTOs.Request.LoginRequestDTO,System.Boolean@)">
+            <summary>
+            Metodo para realizar la autenticacion del usuario
+            </summary>
+            <param name="data">Datos para hacer el login [email][password]</param>
+            <returns>retorna el usuario y token jwt, sino el mensaje de error</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IAuthService.GenerateToken(Mon_GuApp.Models.Medico,System.String)">
+            <summary>
+            Permite generar el token JWT
+            </summary>
+            <param name="user">Usuario que intenta loguear</param>
+            <param name="secretKey">Clave secreta</param>
+            <returns>retorna el token JWT</returns>
+        </member>
+        <member name="T:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO">
+            <summary>
+            DTO para el response del login
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO.data">
+            <summary>
+            Objeto a retornar
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseDTO.type">
+            <summary>
+            Tipo de mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseDTO.message">
+            <summary>
+            Mensaje
+            </summary>
+        </member>
     </members>
 </doc>

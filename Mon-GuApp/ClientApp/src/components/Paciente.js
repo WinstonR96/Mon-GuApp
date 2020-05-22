@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Button, Table } from "reactstrap";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import pacientes from "./paciente.json";
+import Util from "./../Helper/Util";
 
 export class Paciente extends Component {
   static displayname = Paciente.name;
@@ -14,9 +15,21 @@ export class Paciente extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      pacientes,
-    });
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    } else {
+      this.setState({
+        pacientes,
+      });
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   NuevoPaciente = () => {
@@ -52,7 +65,7 @@ export class Paciente extends Component {
           <tbody>
             {this.state.pacientes.map((paciente) => (
               <tr>
-                <td>{paciente.Id}</td>
+                <td>{paciente.Cedula}</td>
                 <td>{paciente.Nombres}</td>
                 <td>{paciente.Edad}</td>
                 <td>{paciente.Sexo}</td>

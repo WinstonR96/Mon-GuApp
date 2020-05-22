@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Mon_GuApp.Interfaces;
+using Mon_GuApp.Services;
 using System.IO;
 using System.Text;
 
@@ -72,6 +74,9 @@ namespace Mon_GuApp
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

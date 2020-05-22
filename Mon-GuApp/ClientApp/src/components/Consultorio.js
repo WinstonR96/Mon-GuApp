@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Table } from "reactstrap";
 import { AiOutlineUserAdd, AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import consultorios from "./consultorio.json";
+import Util from "./../Helper/Util";
 
 export class Consultorio extends Component {
   static displayname = Consultorio.name;
@@ -15,9 +16,21 @@ export class Consultorio extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      consultorios,
-    });
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    } else {
+      this.setState({
+        consultorios,
+      });
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   NuevoConsultorio = () => {

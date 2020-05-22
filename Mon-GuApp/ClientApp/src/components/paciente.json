@@ -1,6 +1,7 @@
 [
   {
     "Id": "1",
+    "Cedula": "12344",
     "Nombres": "John Does",
     "Edad": "20",
     "Sexo": "M",
@@ -9,6 +10,7 @@
   },
   {
     "Id": "2",
+    "Cedula": "456465",
     "Nombres": "Jennifr Does",
     "Edad": "30",
     "Sexo": "F",

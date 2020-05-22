@@ -9,6 +9,8 @@ import {
   Button,
 } from "reactstrap";
 import "./Login.css";
+import Service from "./../Services/Service";
+import Util from "./../Helper/Util";
 
 export class Login extends Component {
   static displayName = Login.name;
@@ -18,9 +20,20 @@ export class Login extends Component {
     this.state = {
       cedula: "",
       password: "",
+      loading: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.ComprobarSesion()) {
+      this.Home();
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   handleChange = async (event) => {
@@ -34,17 +47,28 @@ export class Login extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(`password: ${this.state.password}`);
     const { cedula, password } = this.state;
-    if (cedula === "1" && password === "1") {
-      this.Home(cedula);
-    }
+    var data = {
+      user: {
+        cedula,
+        password,
+      },
+    };
+    Service.post("api/v1/auth/login", data)
+      .then((response) => {
+        if (response.data.token) {
+          Util.GuardarSesion(response.data);
+          this.Home();
+        }
+      })
+      .catch((err) => {
+        Util.AlertaDatosIncorrectos();
+      });
   }
 
-  Home = (cedula) => {
+  Home = () => {
     this.props.history.push({
       pathname: "/home",
-      state: { cedula },
     });
   };
 

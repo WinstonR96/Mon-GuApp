@@ -8,7 +8,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
-
+import Util from "./../Helper/Util";
 export class NewConsultorio extends Component {
   static displayname = NewConsultorio.name;
 
@@ -21,6 +21,20 @@ export class NewConsultorio extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
   }
 
   handleChange = async (event) => {

@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FaDoorClosed } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import Util from "./../Helper/Util";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -17,6 +19,27 @@ export class Home extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    }
+  }
+
+  ComprobarSesion() {
+    return Util.ComprobarSesionActiva();
+  }
+
+  CerrarSesion = () => {
+    Util.CerrarSesion();
+    this.props.history.push({
+      pathname: "/",
+    });
+  };
 
   Paciente = () => {
     this.props.history.push({
@@ -64,7 +87,22 @@ export class Home extends Component {
                 </ToastBody>
               </Toast>
             </Col>
-            <Col></Col>
+            <Col>
+              <Toast>
+                <ToastHeader>Cerrar Sesion</ToastHeader>
+                <ToastBody>
+                  <center>
+                    <Button
+                      outline
+                      color="secondary"
+                      onClick={this.CerrarSesion}
+                    >
+                      <FiLogOut size={"3em"} />
+                    </Button>
+                  </center>
+                </ToastBody>
+              </Toast>
+            </Col>
           </Row>
         </Container>
       </div>
