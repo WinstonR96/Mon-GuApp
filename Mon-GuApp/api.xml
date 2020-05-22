@@ -46,6 +46,31 @@
             <param name="secretKey">Clave secreta</param>
             <returns>retorna el token JWT</returns>
         </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Add(Mon_GuApp.Models.Paciente)">
+            <summary>
+            Agrega un usuario
+            </summary>
+            <param name="user">informacion del usuario</param>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Get(System.Int32)">
+            <summary>
+            Obtiene un usuario
+            </summary>
+            <param name="id">id del usuario</param>
+            <returns>retorna el usuario solicitado</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.GetUsers">
+            <summary>
+            Obtiene todos los usuarios
+            </summary>
+            <returns>retorna un listado de usuarios</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Update(Mon_GuApp.Models.DTOs.Request.EstadoPaciente)">
+            <summary>
+            Actualiza un usuario
+            </summary>
+            <param name="data">informacion del usuario a actualizar</param>
+        </member>
         <member name="T:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO">
             <summary>
             DTO para el response del login

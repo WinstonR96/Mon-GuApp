@@ -20,13 +20,14 @@ namespace Mon_GuApp.Services
         {
             User user = new User();
             Medico medico = new Medico();
+            string passEncriptada = Utils.GetSHA256(data.User.Password);
             using (var ctx = DbContext.GetInstance())
             {
                 SQLiteCommand consultarUsuario = new SQLiteCommand();
                 consultarUsuario.Connection = ctx;
                 consultarUsuario.CommandText = "SELECT * FROM User WHERE Cedula = @Cedula AND Password = @Password";
                 consultarUsuario.Parameters.AddWithValue("@Cedula", data.User.Cedula);
-                consultarUsuario.Parameters.AddWithValue("@Password", Utils.GetSHA256(data.User.Password));
+                consultarUsuario.Parameters.AddWithValue("@Password", passEncriptada);
                 using (var readerUser = consultarUsuario.ExecuteReader())
                 {
                     if (readerUser.HasRows)
