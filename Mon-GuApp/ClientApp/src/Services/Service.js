@@ -1,17 +1,17 @@
 import API from "./Config";
 
 const Service = {
-  post: (params, data) =>
+  post: (params, data, token) =>
     new Promise((resolve, reject) => {
-      API.post(params, data)
+      API.post(params, data, { headers: { Authorization: "Bearer " + token } })
         .then((response) => response.data)
         .then((data) => resolve(data))
         .catch((err) => reject(err));
     }),
 
-  get: (params) =>
+  get: (params, token) =>
     new Promise((resolve, reject) => {
-      API.get(params)
+      API.get(params, { headers: { Authorization: "Bearer " + token } })
         .then((response) => response.data)
         .then((data) => resolve(data))
         .catch((err) => reject(err));

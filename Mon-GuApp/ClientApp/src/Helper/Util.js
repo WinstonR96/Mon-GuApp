@@ -36,8 +36,22 @@ const Util = {
     });
   },
 
+  AlertaPanelDesarrollo: () => {
+    Swal.fire({
+      title: "Panel en desarrollo",
+      text: "Este panel se encuentra en etapa de desarrollo",
+      icon: "info",
+      confirmButtonText: "Ok",
+    });
+  },
+
   GuardarSesion: (data) => {
     localStorage.setItem("Data", JSON.stringify(data));
+  },
+
+  ObtenerToken: () => {
+    let data = JSON.parse(localStorage.getItem("Data"));
+    return data.token;
   },
 
   CerrarSesion: () => {

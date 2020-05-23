@@ -1,4 +1,5 @@
-﻿using Mon_GuApp.Enums;
+﻿using Serilog;
+using Mon_GuApp.Enums;
 using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
 using Mon_GuApp.Models;
@@ -13,8 +14,10 @@ namespace Mon_GuApp.Services
 {
     public class PacienteService : IPacienteService
     {
+        private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<PacienteService>();
         public Paciente Add(Paciente user)
         {
+            log.Information("Registrando paciente nuevo");
             using (var ctx = DbContext.GetInstance())
             {
                 SQLiteCommand insertPaciente = new SQLiteCommand();
@@ -30,8 +33,10 @@ namespace Mon_GuApp.Services
                 var result = insertPaciente.ExecuteNonQuery();
                 if(result > 0)
                 {
+                    log.Information("Registrado exitosamente");
                     return user;
                 }
+                log.Information("Ocurrio un error al registrar");
             }
             return null;
         }
@@ -43,10 +48,11 @@ namespace Mon_GuApp.Services
 
         public List<Paciente> GetPacientes()
         {
+            log.Information("Obteniendo pacientes");
             var result = new List<Paciente>();
             using (var ctx = DbContext.GetInstance())
             {
-                var Query = "SELECT * FROM Paciente WHERE Estado < 2 ORDER BY TRIAGE, Id;";
+                var Query = "SELECT * FROM Paciente WHERE Estado <= 2 ORDER BY TRIAGE, Id;";
                 using (var comando = new SQLiteCommand(Query, ctx))
                 using (var reader = comando.ExecuteReader())
                 {
@@ -64,6 +70,7 @@ namespace Mon_GuApp.Services
                             Sintomas = reader["Sintomas"].ToString(),
                         });
                     }
+                    log.Information($"Se encontraron {result.Count} pacientes");
                 }
             }
             return result;

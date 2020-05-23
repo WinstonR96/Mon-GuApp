@@ -60,7 +60,8 @@ export class Paciente extends Component {
   }
 
   async cargarPaciente() {
-    Service.get("api/v1/paciente")
+    let token = Util.ObtenerToken();
+    Service.get("api/v1/paciente", token)
       .then((pacientes) => this.setState({ pacientes, loading: false }))
       .catch((err) => console.log("error", err));
   }

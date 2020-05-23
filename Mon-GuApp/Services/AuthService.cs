@@ -3,6 +3,7 @@ using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
 using Mon_GuApp.Models;
 using Mon_GuApp.Models.DTOs.Request;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -16,8 +17,11 @@ namespace Mon_GuApp.Services
 {
     public class AuthService : IAuthService
     {
+        private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AuthService>();
         public Medico Authenticate(LoginRequestDTO data, out bool exito)
         {
+            log.Information("Inicio Proceso de autenticacion");
+            log.Information($"Usuario a iniciar intento: {data.User.Cedula}");
             User user = new User();
             Medico medico = new Medico();
             string passEncriptada = Utils.GetSHA256(data.User.Password);
@@ -37,6 +41,7 @@ namespace Mon_GuApp.Services
                             user.Id = Convert.ToInt32(readerUser["Id"].ToString());
                         }
                     }
+                    log.Information("No se encontro un usuario con las credenciales dadas");
                 }
                 SQLiteCommand consultarMedico = new SQLiteCommand();
                 consultarMedico.Connection = ctx;
@@ -52,6 +57,7 @@ namespace Mon_GuApp.Services
                             medico.Nombres = readerMedico["Nombres"].ToString();
                             medico.Cedula = readerMedico["Cedula"].ToString();
                         }
+                        log.Information($"Bienvenido: {medico.Nombres}");
                         exito = true;
                         return medico;
                     }

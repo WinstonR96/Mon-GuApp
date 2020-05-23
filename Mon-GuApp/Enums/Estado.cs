@@ -2,9 +2,9 @@
 {
     public enum Estado
     {
-        Enfermo = 0,
-        En_Espera = 1,
-        Recuperado = 2,
-        En_Atencion = 3
+        En_Espera = 0,
+        En_Observacion = 1,
+        En_Atencion = 2,
+        Recuperado = 3
     }
 }

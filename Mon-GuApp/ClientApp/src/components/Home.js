@@ -9,7 +9,7 @@ import {
   Button,
 } from "reactstrap";
 import { BsFillPersonFill } from "react-icons/bs";
-import { FaDoorClosed } from "react-icons/fa";
+import { FaDoorClosed, FaBookMedical } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import Util from "./../Helper/Util";
 
@@ -42,6 +42,7 @@ export class Home extends Component {
   };
 
   Paciente = () => {
+    Util.ObtenerToken();
     this.props.history.push({
       pathname: "/paciente",
     });
@@ -53,12 +54,27 @@ export class Home extends Component {
     });
   };
 
+  Medico = () => {
+    Util.AlertaPanelDesarrollo();
+  };
+
   render() {
     return (
       <div>
         <Container>
           <Row>
-            <Col></Col>
+            <Col>
+              <Toast>
+                <ToastHeader>Medicos</ToastHeader>
+                <ToastBody>
+                  <center>
+                    <Button outline color="secondary" onClick={this.Medico}>
+                      <FaBookMedical size={"3em"} />
+                    </Button>
+                  </center>
+                </ToastBody>
+              </Toast>
+            </Col>
             <Col>
               <Toast>
                 <ToastHeader>Pacientes</ToastHeader>

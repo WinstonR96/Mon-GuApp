@@ -53,6 +53,7 @@ export class NewPaciente extends Component {
 
   submitForm(e) {
     e.preventDefault();
+    let token = Util.ObtenerToken();
     const { Cedula, Nombres, Edad, Sexo, Triage, Sintomas } = this.state;
     if (Cedula && Nombres && Edad && Sexo && Triage && Sintomas) {
       var data = {
@@ -63,7 +64,7 @@ export class NewPaciente extends Component {
         triage: Triage,
         sintomas: Sintomas,
       };
-      Service.post("api/v1/paciente", data)
+      Service.post("api/v1/paciente", data, token)
         .then((response) => {
           Util.AlertaUsuarioRegistrado();
           this.IrPaciente();

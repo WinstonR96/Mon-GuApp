@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
@@ -14,6 +15,7 @@ namespace Mon_GuApp.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class PacienteController: ControllerBase
     {
         private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AuthController>();
