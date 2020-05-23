@@ -52,21 +52,28 @@ export class DetalleConsultorio extends Component {
     };
     Service.post("api/v1/atencion", data, token)
       .then((response) => {
-        window.location.reload(true);
-        Util.AlertaLlamarPaciente(response.message);
+        let informacion = `${
+          response.message + " con el paciente " + response.data.nombres
+        }`;
+        Util.AlertaLlamarPaciente(informacion);
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };
 
   Home = () => {
     this.props.history.push({
-      pathname: "/home",
+      pathname: "/consultorio",
     });
   };
 
   DetallePaciente = () => {
+    const { consultorio } = this.state;
     this.props.history.push({
       pathname: "/paciente/detalle",
+      state: { consultorio_id: consultorio.id },
     });
   };
 

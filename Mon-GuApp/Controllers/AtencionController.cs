@@ -10,6 +10,7 @@ using Mon_GuApp.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Mon_GuApp.Models.DTOs.Request;
 using Mon_GuApp.Models.DTOs.Response;
+using Mon_GuApp.Models;
 
 namespace Mon_GuApp.Controllers
 {
@@ -29,6 +30,17 @@ namespace Mon_GuApp.Controllers
         }
 
         /// <summary>
+        /// Obtener un paciente en atencion
+        /// </summary>
+        /// <param name="id">id del consultorio a consultaar</param>
+        /// <returns>retorna un paciente en consultorio</returns>
+        [HttpGet("{id}")]
+        public ActionResult<Paciente> GetConsultorio(int id)
+        {
+            return _atencionService.ObtenerPacienteEnConsulta(id);
+        }
+
+        /// <summary>
         /// Procesar una atencion
         /// </summary>
         /// <param name="data">Informacion requerida para llamar un paciente</param>
@@ -37,19 +49,21 @@ namespace Mon_GuApp.Controllers
         public IActionResult Add([FromBody] ConsultorioLlamaPaciente data)
         {
             string mensaje = "";
+            Paciente p = new Paciente();
             if (data == null)
                 return BadRequest();
 
             try
             {
                 
-                var res = _atencionService.LlamarPaciente(data, out mensaje);
+                var res = _atencionService.LlamarPaciente(data, out mensaje, out p);
                 if (res)
                 {
-                    return Ok(new ResponseDTO()
+                    return Ok(new ResponseObjectDTO()
                     {
                         message = mensaje,
-                        type = "I"
+                        type = "I",
+                        data = p
                     });
                 }
                 else

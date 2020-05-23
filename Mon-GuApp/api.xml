@@ -4,6 +4,13 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.GetConsultorio(System.Int32)">
+            <summary>
+            Obtener un paciente en atencion
+            </summary>
+            <param name="id">id del consultorio a consultaar</param>
+            <returns>retorna un paciente en consultorio</returns>
+        </member>
         <member name="M:Mon_GuApp.Controllers.AtencionController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioLlamaPaciente)">
             <summary>
             Procesar una atencion
@@ -147,6 +154,21 @@
         <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseDTO.message">
             <summary>
             Mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.type">
+            <summary>
+            Tipo de mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.message">
+            <summary>
+            Mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.data">
+            <summary>
+            Objeto
             </summary>
         </member>
     </members>

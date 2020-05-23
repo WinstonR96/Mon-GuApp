@@ -12,7 +12,7 @@ namespace Mon_GuApp.Services
     public class AtencionService: IAtencionService
     {
         private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AtencionService>();
-        public bool LlamarPaciente(ConsultorioLlamaPaciente data, out string mensaje)
+        public bool LlamarPaciente(ConsultorioLlamaPaciente data, out string mensaje, out Paciente dataPaciente)
         {
             log.Information("Llamando paciente");
             bool res = false;
@@ -100,7 +100,42 @@ namespace Mon_GuApp.Services
                 }
                 
             }
+            dataPaciente = paciente;
             return res;
+        }
+
+        public Paciente ObtenerPacienteEnConsulta(int id)
+        {
+            log.Information("Obteniendo paciente");
+            Paciente paciente = new Paciente();
+            //Se busca el paciente proximo a atender
+            using (var ctx = DbContext.GetInstance())
+            {
+                var Query = "SELECT p.* FROM Atencion AS a INNER JOIN Consultorio AS c ON c.Id = a.Id_consultorio INNER JOIN Paciente AS p ON p.Id = a.Id_paciente WHERE c.Id = @id_consultorio AND a.Estado = 0";
+                SQLiteCommand pacienteCommand = new SQLiteCommand();
+                pacienteCommand.Connection = ctx;
+                pacienteCommand.CommandText = Query;
+                pacienteCommand.Parameters.AddWithValue("@id_consultorio", id);
+                using (var reader = pacienteCommand.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            paciente.Id = reader["Id"].ToString();
+                            paciente.Cedula = reader["Cedula"].ToString();
+                            paciente.Nombres = reader["Nombres"].ToString();
+                            paciente.Edad = reader["Edad"].ToString();
+                            paciente.Sexo = ((Sexo)Convert.ToInt32(reader["Sexo"].ToString())).ToString();
+                            paciente.Triage = ((Triage)Convert.ToInt32(reader["Triage"].ToString())).ToString().Replace("_", " ");
+                            paciente.Estado = ((Enums.EstadoPaciente)Convert.ToInt32(reader["Estado"].ToString())).ToString().Replace("_", " ");
+                            paciente.Sintomas = reader["Sintomas"].ToString();
+                        }
+                        log.Information($"Se encontro el paciente {paciente.Cedula}");
+                    }
+                }
+            }
+            return paciente;
         }
     }
 }
