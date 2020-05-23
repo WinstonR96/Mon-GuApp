@@ -9,6 +9,7 @@ using Mon_GuApp.Helpers;
 using System.Data.SQLite;
 using Mon_GuApp.Models;
 using Mon_GuApp.Models.DTOs.Request;
+using Mon_GuApp.Enums;
 
 namespace Mon_GuApp.Services
 {
@@ -37,7 +38,7 @@ namespace Mon_GuApp.Services
                     actualizarMedico.Parameters.AddWithValue("@Id", Convert.ToInt32(data.Id_medico));
                     actualizarMedico.Parameters.AddWithValue("@estado_medico", Enums.EstadoMedico.Asignado);
                     var resultado = actualizarMedico.ExecuteNonQuery();
-                    if(resultado > 0)
+                    if (resultado > 0)
                     {
                         log.Information("Registrado exitosamente");
                         res = true;
@@ -120,5 +121,6 @@ namespace Mon_GuApp.Services
             }
             return result;
         }
+
     }
 }

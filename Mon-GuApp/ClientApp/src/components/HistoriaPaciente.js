@@ -14,7 +14,6 @@ import {
   Input,
 } from "reactstrap";
 import { AiFillAlert, AiFillAliwangwang, AiFillPushpin } from "react-icons/ai";
-import pacientes from "./paciente.json";
 import Util from "./../Helper/Util";
 
 export class HistoriaPaciente extends Component {
@@ -61,14 +60,7 @@ export class HistoriaPaciente extends Component {
     return Util.ComprobarSesionActiva();
   }
 
-  CargarPaciente() {
-    let paciente = pacientes.find(
-      (c) => c.Id === this.props.location.state.pacienteId
-    );
-    this.setState({
-      paciente,
-    });
-  }
+  CargarPaciente() {}
 
   MostrarPanel() {
     let valorButton = !this.state.ocultar ? "Subir Muestra" : "Cancelar";

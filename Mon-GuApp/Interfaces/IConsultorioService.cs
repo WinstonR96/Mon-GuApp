@@ -22,5 +22,7 @@ namespace Mon_GuApp.Interfaces
         public ConsultorioDTO GetConsultorio(int id);
 
         public bool Add(ConsultorioAddDTO data);
+
+        
     }
 }

@@ -9,9 +9,6 @@ import { HistoriaPaciente } from "./components/HistoriaPaciente";
 import { Consultorio } from "./components/Consultorio";
 import { NewConsultorio } from "./components/NewConsultorio";
 import { DetalleConsultorio } from "./components/DetalleConsultorio";
-import { FetchData } from "./components/FetchData";
-import { Counter } from "./components/Counter";
-
 import "./custom.css";
 
 export default class App extends Component {
@@ -32,8 +29,6 @@ export default class App extends Component {
           path="/consultorio/detalle"
           component={DetalleConsultorio}
         />
-        <Route path="/counter" component={Counter} />
-        <Route path="/fetch-data" component={FetchData} />
       </Layout>
     );
   }

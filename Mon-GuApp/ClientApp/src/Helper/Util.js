@@ -63,6 +63,14 @@ const Util = {
     });
   },
 
+  AlertaLlamarPaciente: (mensaje) => {
+    Swal.fire({
+      text: mensaje,
+      icon: "info",
+      confirmButtonText: "Ok",
+    });
+  },
+
   GuardarSesion: (data) => {
     localStorage.setItem("Data", JSON.stringify(data));
   },

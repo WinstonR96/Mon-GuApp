@@ -4,6 +4,13 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioLlamaPaciente)">
+            <summary>
+            Procesar una atencion
+            </summary>
+            <param name="data">Informacion requerida para llamar un paciente</param>
+            
+        </member>
         <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorios">
             <summary>
             Obtener todos los consultorios

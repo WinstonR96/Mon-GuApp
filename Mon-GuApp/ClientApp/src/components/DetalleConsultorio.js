@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { Card, CardBody, Button } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardFooter,
+  Button,
+} from "reactstrap";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
-// import consultorios from "./consultorio.json";
+import { AiFillHome } from "react-icons/ai";
 
 export class DetalleConsultorio extends Component {
   static displayname = DetalleConsultorio.name;
@@ -36,12 +44,29 @@ export class DetalleConsultorio extends Component {
       .catch((err) => console.log("error", err));
   }
 
-  DetallePaciente = () => {
+  LlamarPaciente = () => {
     const { consultorio } = this.state;
-    let pacienteId = Util.getProp(consultorio, "Paciente.Id");
+    let token = Util.ObtenerToken();
+    var data = {
+      id_consultorio: consultorio.id,
+    };
+    Service.post("api/v1/atencion", data, token)
+      .then((response) => {
+        window.location.reload(true);
+        Util.AlertaLlamarPaciente(response.message);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  Home = () => {
+    this.props.history.push({
+      pathname: "/home",
+    });
+  };
+
+  DetallePaciente = () => {
     this.props.history.push({
       pathname: "/paciente/detalle",
-      state: { pacienteId },
     });
   };
 
@@ -49,20 +74,25 @@ export class DetalleConsultorio extends Component {
     const { consultorio } = this.state;
     return (
       <div>
+        <Button outline color="secondary" onClick={this.Home}>
+          <AiFillHome /> Regresar
+        </Button>
         <Card>
+          <CardHeader>Consultorio Nro: {consultorio.codigo}</CardHeader>
           <CardBody>
-            <h3>Consultorio Nro: {this.state.consultorio.codigo}</h3>
-            <h3>Medico a cargo: {this.state.consultorio.medico}</h3>
+            <CardTitle>Medico a cargo: {consultorio.medico}</CardTitle>
+            <CardText>Estado: {consultorio.estado}</CardText>
             {consultorio.estado === "Disponible" ? (
-              <Button>Llamar paciente</Button>
-            ) : // <div>
-            //   <h3>Paciente: {pacienteNombre}</h3>
-            //   <Button onClick={this.DetallePaciente}>
-            //     Ver Historia paciente
-            //   </Button>
-            // </div>
-            null}
+              <Button onClick={this.LlamarPaciente}>Llamar paciente</Button>
+            ) : (
+              <div>
+                <Button onClick={this.DetallePaciente}>
+                  Ver Historia paciente
+                </Button>
+              </div>
+            )}
           </CardBody>
+          <CardFooter>{consultorio.id}</CardFooter>
         </Card>
       </div>
     );

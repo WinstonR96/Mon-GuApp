@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Table } from "reactstrap";
-import { AiOutlineUserAdd, AiFillDelete } from "react-icons/ai";
+import { AiOutlineUserAdd, AiFillDelete, AiFillHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
-// import consultorios from "./consultorio.json";
 
 export class Consultorio extends Component {
   static displayname = Consultorio.name;
@@ -27,6 +26,12 @@ export class Consultorio extends Component {
       this.cargarConsultorio();
     }
   }
+
+  Home = () => {
+    this.props.history.push({
+      pathname: "/home",
+    });
+  };
 
   ComprobarSesion() {
     return Util.ComprobarSesionActiva();
@@ -64,51 +69,61 @@ export class Consultorio extends Component {
               <Button outline color="secondary" onClick={this.NuevoConsultorio}>
                 <AiOutlineUserAdd /> Registrar Consultorio
               </Button>
+              {"  "}
+              <Button outline color="secondary" onClick={this.Home}>
+                <AiFillHome /> Regresar
+              </Button>
             </Col>
           </Row>
         </Container>
         <br />
-        <Table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Codigo</th>
-              <th>Medico</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.consultorios.map((consultorio) => (
-              <tr key={consultorio.id}>
-                <td>
-                  <Link
-                    to={{
-                      pathname: "consultorio/detalle",
-                      state: { Codigo: consultorio.id },
-                    }}
-                  >
-                    {consultorio.id}
-                  </Link>
-                </td>
-                <td>{consultorio.codigo}</td>
-                <td>{consultorio.medico}</td>
-                <td>{consultorio.estado}</td>
-                <td>
-                  <Button
-                    outline
-                    color="secondary"
-                    onClick={this.EliminarConsultorio.bind(
-                      this,
-                      consultorio.id
-                    )}
-                  >
-                    <AiFillDelete />
-                  </Button>
-                </td>
+        {this.state.loading ? (
+          <p>
+            <em>Loading...</em>
+          </p>
+        ) : (
+          <Table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Medico</th>
+                <th>Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {this.state.consultorios.map((consultorio) => (
+                <tr key={consultorio.id}>
+                  <td>
+                    <Link
+                      to={{
+                        pathname: "consultorio/detalle",
+                        state: { Codigo: consultorio.id },
+                      }}
+                    >
+                      {consultorio.id}
+                    </Link>
+                  </td>
+                  <td>{consultorio.codigo}</td>
+                  <td>{consultorio.medico}</td>
+                  <td>{consultorio.estado}</td>
+                  <td>
+                    <Button
+                      outline
+                      color="secondary"
+                      onClick={this.EliminarConsultorio.bind(
+                        this,
+                        consultorio.id
+                      )}
+                    >
+                      <AiFillDelete />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </div>
     );
   }
