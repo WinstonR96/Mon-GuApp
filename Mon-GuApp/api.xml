@@ -4,6 +4,12 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
+        <member name="M:Mon_GuApp.Controllers.PacienteController.GetUsers">
+            <summary>
+            Obtener todos los pacientes
+            </summary>
+            <returns>retorna un listado de usuarios</returns>
+        </member>
         <member name="P:Mon_GuApp.Helpers.LoggerApp.GetLogger">
             <summary>
             Obtiene la instancia actual
@@ -48,26 +54,26 @@
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Add(Mon_GuApp.Models.Paciente)">
             <summary>
-            Agrega un usuario
+            Agrega un paciente
             </summary>
             <param name="user">informacion del usuario</param>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Get(System.Int32)">
             <summary>
-            Obtiene un usuario
+            Obtiene un paciente
             </summary>
             <param name="id">id del usuario</param>
             <returns>retorna el usuario solicitado</returns>
         </member>
-        <member name="M:Mon_GuApp.Interfaces.IPacienteService.GetUsers">
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.GetPacientes">
             <summary>
-            Obtiene todos los usuarios
+            Obtiene todos los pacientes
             </summary>
             <returns>retorna un listado de usuarios</returns>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Update(Mon_GuApp.Models.DTOs.Request.EstadoPaciente)">
             <summary>
-            Actualiza un usuario
+            Actualiza el estado de un paciente
             </summary>
             <param name="data">informacion del usuario a actualizar</param>
         </member>

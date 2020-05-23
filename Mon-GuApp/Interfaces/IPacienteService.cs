@@ -10,26 +10,26 @@ namespace Mon_GuApp.Interfaces
     public interface IPacienteService
     {
         /// <summary>
-        /// Agrega un usuario
+        /// Agrega un paciente
         /// </summary>
         /// <param name="user">informacion del usuario</param>
         public Paciente Add(Paciente user);
 
         /// <summary>
-        /// Obtiene un usuario
+        /// Obtiene un paciente
         /// </summary>
         /// <param name="id">id del usuario</param>
         /// <returns>retorna el usuario solicitado</returns>
         public Task<Paciente> Get(int id);
 
         /// <summary>
-        /// Obtiene todos los usuarios
+        /// Obtiene todos los pacientes
         /// </summary>
         /// <returns>retorna un listado de usuarios</returns>
-        public List<Paciente> GetUsers();
+        public List<Paciente> GetPacientes();
 
         /// <summary>
-        /// Actualiza un usuario
+        /// Actualiza el estado de un paciente
         /// </summary>
         /// <param name="data">informacion del usuario a actualizar</param>
         public void Update(EstadoPaciente data);

@@ -13,9 +13,9 @@ namespace Mon_GuApp.Models
         public string Cedula { get; set; }
         public string Nombres { get; set; }
         public string Edad { get; set; }
-        public Sexo Sexo { get; set; }
-        public Triage Triage { get; set; }
+        public string Sexo { get; set; }
+        public string Triage { get; set; }
         public string Sintomas { get; set; }
-        public Estado Estado { get; set; }
+        public string Estado { get; set; }
     }
 }
