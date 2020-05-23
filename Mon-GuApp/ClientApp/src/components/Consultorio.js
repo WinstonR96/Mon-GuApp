@@ -46,7 +46,13 @@ export class Consultorio extends Component {
   };
 
   EliminarConsultorio = (codigo) => {
-    console.log("Eliminando", codigo);
+    let token = Util.ObtenerToken();
+    Service.delete(`api/v1/consultorio/${codigo}`, token)
+      .then((response) => {
+        window.location.reload(true);
+        Util.AlertaConsultorioEliminado();
+      })
+      .catch((err) => console.log("error", err));
   };
 
   render() {

@@ -36,5 +36,43 @@ namespace Mon_GuApp.Controllers
         {
             return _consultorioService.GetConsultorios();
         }
+
+        /// <summary>
+        /// elimina un consultorio
+        /// </summary>
+        /// <param name="id">id del consultorio a eliminar</param>
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                if (_consultorioService.DeleteConsultorio(id))
+                {
+                    return Ok(new ResponseDTO()
+                    {
+                        type = "I",
+                        message = "Eliminado sastifactoriamente"
+                    });
+                }
+                else
+                {
+                    return Ok(new ResponseDTO()
+                    {
+                        type = "E",
+                        message = "Ocurrio un error"
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseDTO()
+                {
+                    type = "E",
+                    message = ex.Message
+                });
+            }
+
+        }
     }
 }

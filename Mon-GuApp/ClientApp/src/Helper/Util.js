@@ -27,6 +27,15 @@ const Util = {
     });
   },
 
+  AlertaConsultorioEliminado: () => {
+    Swal.fire({
+      icon: "success",
+      text: "Consultorio eliminado correctamente",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#0C7DED",
+    });
+  },
+
   AlertaDatosIncompletos: () => {
     Swal.fire({
       title: "Información incompleta",

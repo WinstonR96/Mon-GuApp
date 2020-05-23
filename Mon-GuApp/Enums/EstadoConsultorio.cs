@@ -3,6 +3,7 @@
     public enum EstadoConsultorio
     {
         Disponible = 0,
-        Ocupado = 1
+        Ocupado = 1,
+        Eliminado = 2
     }
 }

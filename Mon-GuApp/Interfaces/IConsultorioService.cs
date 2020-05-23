@@ -14,5 +14,7 @@ namespace Mon_GuApp.Interfaces
         /// </summary>
         /// <returns>retorna un listado de consultorios</returns>
         public List<ConsultorioDTO> GetConsultorios();
+
+        public bool DeleteConsultorio(int id);
     }
 }
