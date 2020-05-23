@@ -29,7 +29,7 @@ namespace Mon_GuApp.Services
                 insertPaciente.Parameters.AddWithValue("@Sexo", user.Sexo);
                 insertPaciente.Parameters.AddWithValue("@Triage", user.Triage);
                 insertPaciente.Parameters.AddWithValue("@Sintomas", user.Sintomas);
-                insertPaciente.Parameters.AddWithValue("@Estado", Estado.En_Espera);
+                insertPaciente.Parameters.AddWithValue("@Estado", Enums.EstadoPaciente.En_Espera);
                 var result = insertPaciente.ExecuteNonQuery();
                 if(result > 0)
                 {
@@ -66,7 +66,7 @@ namespace Mon_GuApp.Services
                             Edad = reader["Edad"].ToString(),
                             Sexo = ((Sexo)Convert.ToInt32(reader["Sexo"].ToString())).ToString(),
                             Triage = ((Triage)Convert.ToInt32(reader["Triage"].ToString())).ToString().Replace("_", " "),
-                            Estado = ((Estado)Convert.ToInt32(reader["Estado"].ToString())).ToString().Replace("_", " "),
+                            Estado = ((Enums.EstadoPaciente)Convert.ToInt32(reader["Estado"].ToString())).ToString().Replace("_", " "),
                             Sintomas = reader["Sintomas"].ToString(),
                         });
                     }
@@ -76,7 +76,7 @@ namespace Mon_GuApp.Services
             return result;
         }
 
-        public void Update(EstadoPaciente data)
+        public void Update(Models.DTOs.Request.EstadoPaciente data)
         {
             throw new NotImplementedException();
         }

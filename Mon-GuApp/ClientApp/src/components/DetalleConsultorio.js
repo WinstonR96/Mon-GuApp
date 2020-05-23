@@ -15,7 +15,6 @@ export class DetalleConsultorio extends Component {
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",
@@ -41,7 +40,6 @@ export class DetalleConsultorio extends Component {
   DetallePaciente = () => {
     const { consultorio } = this.state;
     let pacienteId = Util.getProp(consultorio, "Paciente.Id");
-    console.log("Detalle consultorio: ", consultorio, pacienteId);
     this.props.history.push({
       pathname: "/paciente/detalle",
       state: { pacienteId },
@@ -52,8 +50,6 @@ export class DetalleConsultorio extends Component {
     const { consultorio } = this.state;
     let pacienteNombre = Util.getProp(consultorio, "Paciente.Nombres");
     let pacienteId = Util.getProp(consultorio, "Paciente.Id");
-    console.log("consultorio", consultorio);
-    console.log("Id", pacienteId);
     return (
       <div>
         <Card>

@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
-  NavLink,
-  Collapse,
-} from "reactstrap";
+import { Container, Navbar, NavbarBrand } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
 import Util from "./../Helper/Util";
@@ -59,33 +51,6 @@ export class NavMenu extends Component {
             <NavbarBrand tag={Link} to="/">
               MonGuApp
             </NavbarBrand>
-            {/* <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse
-              className="d-sm-inline-flex flex-sm-row-reverse"
-              isOpen={!this.state.collapsed}
-              navbar
-            >
-              {this.state.active ? (
-                <ul className="navbar-nav flex-grow">
-                  <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/home">
-                      Home
-                    </NavLink>
-                  </NavItem>
-
-                  <NavItem>
-                    <NavLink
-                      tag={Link}
-                      className="text-dark"
-                      to="/"
-                      onClick={this.CerrarSesion}
-                    >
-                      Cerrar Sesion
-                    </NavLink>
-                  </NavItem>
-                </ul>
-              ) : null}
-            </Collapse> */}
           </Container>
         </Navbar>
       </header>

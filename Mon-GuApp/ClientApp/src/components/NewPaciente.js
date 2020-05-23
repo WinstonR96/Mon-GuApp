@@ -30,7 +30,6 @@ export class NewPaciente extends Component {
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",

@@ -17,14 +17,12 @@ export class Paciente extends Component {
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",
       });
     } else {
       this.cargarPaciente();
-      console.log("Pacientes", this.state.pacientes);
     }
   }
 

@@ -1,6 +1,6 @@
 ﻿namespace Mon_GuApp.Enums
 {
-    public enum Estado
+    public enum EstadoPaciente
     {
         En_Espera = 0,
         En_Observacion = 1,

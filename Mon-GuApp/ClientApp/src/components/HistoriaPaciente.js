@@ -39,7 +39,6 @@ export class HistoriaPaciente extends Component {
     reader.readAsDataURL(files[0]);
     reader.onload = (e) => {
       let file = e.target.result;
-      console.log(file);
     };
   };
 
@@ -49,7 +48,6 @@ export class HistoriaPaciente extends Component {
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",
@@ -82,7 +80,6 @@ export class HistoriaPaciente extends Component {
 
   render() {
     const { paciente } = this.state;
-    console.log("Paciente", paciente);
     return (
       <div>
         <Card>

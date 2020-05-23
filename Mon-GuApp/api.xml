@@ -4,6 +4,12 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetUsers">
+            <summary>
+            Obtener todos los consultorios
+            </summary>
+            <returns>retorna un listado de consultorios</returns>
+        </member>
         <member name="M:Mon_GuApp.Controllers.PacienteController.GetUsers">
             <summary>
             Obtener todos los pacientes
@@ -58,6 +64,12 @@
             <param name="user">Usuario que intenta loguear</param>
             <param name="secretKey">Clave secreta</param>
             <returns>retorna el token JWT</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IConsultorioService.GetConsultorios">
+            <summary>
+            Obtiene todos los consultorios
+            </summary>
+            <returns>retorna un listado de consultorios</returns>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Add(Mon_GuApp.Models.Paciente)">
             <summary>

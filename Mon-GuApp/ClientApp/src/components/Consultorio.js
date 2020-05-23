@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Container, Row, Col, Button, Table } from "reactstrap";
 import { AiOutlineUserAdd, AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import consultorios from "./consultorio.json";
 import Util from "./../Helper/Util";
+import Service from "./../Services/Service";
+// import consultorios from "./consultorio.json";
 
 export class Consultorio extends Component {
   static displayname = Consultorio.name;
@@ -12,25 +13,30 @@ export class Consultorio extends Component {
     super(props);
     this.state = {
       consultorios: [],
+      loading: true,
     };
   }
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",
       });
     } else {
-      this.setState({
-        consultorios,
-      });
+      this.cargarConsultorio();
     }
   }
 
   ComprobarSesion() {
     return Util.ComprobarSesionActiva();
+  }
+
+  cargarConsultorio() {
+    let token = Util.ObtenerToken();
+    Service.get("api/v1/consultorio", token)
+      .then((consultorios) => this.setState({ consultorios, loading: false }))
+      .catch((err) => console.log("error", err));
   }
 
   NuevoConsultorio = () => {
@@ -59,39 +65,35 @@ export class Consultorio extends Component {
         <Table>
           <thead>
             <tr>
+              <th>Id</th>
               <th>Codigo</th>
               <th>Medico</th>
               <th>Estado</th>
-              <th>Paciente</th>
             </tr>
           </thead>
           <tbody>
             {this.state.consultorios.map((consultorio) => (
-              <tr>
+              <tr key={consultorio.id}>
                 <td>
                   <Link
                     to={{
                       pathname: "consultorio/detalle",
-                      state: { Codigo: consultorio.Codigo },
+                      state: { Codigo: consultorio.id },
                     }}
                   >
-                    {consultorio.Codigo}
+                    {consultorio.id}
                   </Link>
                 </td>
-                <td>{consultorio.Medico}</td>
-                <td>{consultorio.Estado}</td>
-                {consultorio.Paciente ? (
-                  <td>{consultorio.Paciente.Nombres}</td>
-                ) : (
-                  <td></td>
-                )}
+                <td>{consultorio.codigo}</td>
+                <td>{consultorio.medico}</td>
+                <td>{consultorio.estado}</td>
                 <td>
                   <Button
                     outline
                     color="secondary"
                     onClick={this.EliminarConsultorio.bind(
                       this,
-                      consultorio.Codigo
+                      consultorio.id
                     )}
                   >
                     <AiFillDelete />

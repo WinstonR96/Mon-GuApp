@@ -25,7 +25,6 @@ export class NewConsultorio extends Component {
 
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",

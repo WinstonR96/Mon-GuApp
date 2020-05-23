@@ -16,13 +16,8 @@ import Util from "./../Helper/Util";
 export class Home extends Component {
   static displayName = Home.name;
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     let result = this.ComprobarSesion();
-    console.log(result);
     if (!result) {
       this.props.history.push({
         pathname: "/",
