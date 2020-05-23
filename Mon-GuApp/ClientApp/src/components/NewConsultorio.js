@@ -9,6 +9,8 @@ import {
   Button,
 } from "reactstrap";
 import Util from "./../Helper/Util";
+import Service from "./../Services/Service";
+
 export class NewConsultorio extends Component {
   static displayname = NewConsultorio.name;
 
@@ -16,6 +18,7 @@ export class NewConsultorio extends Component {
     super(props);
 
     this.state = {
+      medicos: [],
       Codigo: "",
       Medico: "",
     };
@@ -29,7 +32,16 @@ export class NewConsultorio extends Component {
       this.props.history.push({
         pathname: "/",
       });
+    } else {
+      this.cargarMedicos();
     }
+  }
+
+  cargarMedicos() {
+    let token = Util.ObtenerToken();
+    Service.get("/api/v1/medico", token)
+      .then((medicos) => this.setState({ medicos }))
+      .catch((err) => console.log(err));
   }
 
   ComprobarSesion() {
@@ -47,9 +59,40 @@ export class NewConsultorio extends Component {
 
   submitForm(e) {
     e.preventDefault();
+    const { Codigo, Medico } = this.state;
+    var data = {
+      cod_Consultorio: Codigo,
+      id_medico: Medico,
+    };
+    if (Codigo && Medico) {
+      let token = Util.ObtenerToken();
+      Service.post("api/v1/consultorio", data, token)
+        .then((response) => {
+          Util.AlertaConsultorioRegistrado();
+          this.IrConsultorio();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      Util.AlertaDatosIncompletos();
+    }
+  }
+
+  IrConsultorio() {
+    this.props.history.push({
+      pathname: "/consultorio",
+    });
   }
 
   render() {
+    const options = [];
+    options.push(<option value={"s"}>{"Seleccione"}</option>);
+    this.state.medicos.forEach((entry, index) =>
+      options.push(
+        <option key={index} value={entry.id}>
+          {entry.nombres}
+        </option>
+      )
+    );
     return (
       <div>
         <Container className="App">
@@ -59,7 +102,7 @@ export class NewConsultorio extends Component {
               <FormGroup>
                 <Label for="Codigo">Codigo</Label>
                 <Input
-                  type="number"
+                  type="text"
                   name="Codigo"
                   id="Codigo"
                   onChange={(e) => this.handleChange(e)}
@@ -70,14 +113,18 @@ export class NewConsultorio extends Component {
               <FormGroup>
                 <Label for="Medico">Medico</Label>
                 <Input
-                  type="text"
+                  type="select"
                   name="Medico"
                   id="Medico"
                   onChange={(e) => this.handleChange(e)}
-                />
+                >
+                  {options}
+                </Input>
               </FormGroup>
             </Col>
             <Button>Registrar</Button>
+            {"  "}
+            <Button onClick={this.IrConsultorio.bind(this)}>Cancelar</Button>
           </Form>
         </Container>
       </div>

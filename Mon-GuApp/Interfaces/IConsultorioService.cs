@@ -1,4 +1,6 @@
-﻿using Mon_GuApp.Models.DTOs.Response;
+﻿using Mon_GuApp.Models;
+using Mon_GuApp.Models.DTOs.Request;
+using Mon_GuApp.Models.DTOs.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,9 @@ namespace Mon_GuApp.Interfaces
         public List<ConsultorioDTO> GetConsultorios();
 
         public bool DeleteConsultorio(int id);
+
+        public ConsultorioDTO GetConsultorio(int id);
+
+        public bool Add(ConsultorioAddDTO data);
     }
 }

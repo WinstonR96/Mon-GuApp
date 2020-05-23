@@ -4,17 +4,37 @@
         <name>Mon-GuApp</name>
     </assembly>
     <members>
-        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetUsers">
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorios">
             <summary>
             Obtener todos los consultorios
             </summary>
             <returns>retorna un listado de consultorios</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorio(System.Int32)">
+            <summary>
+            Obtener un consultorio
+            </summary>
+            <param name="id">id del consultorio a consultaar</param>
+            <returns>retorna un listado de consultorio</returns>
         </member>
         <member name="M:Mon_GuApp.Controllers.ConsultorioController.Delete(System.Int32)">
             <summary>
             elimina un consultorio
             </summary>
             <param name="id">id del consultorio a eliminar</param>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioAddDTO)">
+            <summary>
+            Agregar nuevo consultorio
+            </summary>
+            <param name="data">Informacion del nuevo consultorio</param>
+            
+        </member>
+        <member name="M:Mon_GuApp.Controllers.MedicoController.GetConsultorios">
+            <summary>
+            Obtener todos los medicos disponibles
+            </summary>
+            <returns>retorna un listado de consultorios</returns>
         </member>
         <member name="M:Mon_GuApp.Controllers.PacienteController.GetUsers">
             <summary>

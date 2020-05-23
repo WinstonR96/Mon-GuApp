@@ -27,6 +27,15 @@ const Util = {
     });
   },
 
+  AlertaConsultorioRegistrado: () => {
+    Swal.fire({
+      icon: "success",
+      text: "Datos registrados correctamente",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#0C7DED",
+    });
+  },
+
   AlertaConsultorioEliminado: () => {
     Swal.fire({
       icon: "success",

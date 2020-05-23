@@ -79,6 +79,7 @@ namespace Mon_GuApp
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IPacienteService, PacienteService>();
             services.AddTransient<IConsultorioService, ConsultorioService>();
+            services.AddTransient<IMedicoService, MedicoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
