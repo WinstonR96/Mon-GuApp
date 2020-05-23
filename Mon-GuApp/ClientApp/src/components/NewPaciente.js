@@ -9,6 +9,7 @@ import {
   Button,
 } from "reactstrap";
 import Util from "./../Helper/Util";
+import Service from "./../Services/Service";
 
 export class NewPaciente extends Component {
   static displayname = NewPaciente.name;
@@ -52,7 +53,31 @@ export class NewPaciente extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    console.log(this.state.Triage);
+    const { Cedula, Nombres, Edad, Sexo, Triage, Sintomas } = this.state;
+    if (Cedula && Nombres && Edad && Sexo && Triage && Sintomas) {
+      var data = {
+        cedula: Cedula,
+        nombres: Nombres,
+        edad: Edad,
+        sexo: Sexo,
+        triage: Triage,
+        sintomas: Sintomas,
+      };
+      Service.post("api/v1/paciente", data)
+        .then((response) => {
+          Util.AlertaUsuarioRegistrado();
+          this.IrPaciente();
+        })
+        .catch((err) => console.log("error", err));
+    } else {
+      Util.AlertaDatosIncompletos();
+    }
+  }
+
+  IrPaciente() {
+    this.props.history.push({
+      pathname: "/paciente",
+    });
   }
 
   render() {
@@ -103,10 +128,10 @@ export class NewPaciente extends Component {
                   id="Sexo"
                   onChange={(e) => this.handleChange(e)}
                 >
-                  <option value="0">Seleccione...</option>
-                  <option value="M">Masculino</option>
-                  <option value="F">Femenino</option>
-                  <option value="S">Sin Especificar</option>
+                  <option value="s">Seleccione...</option>
+                  <option value="0">Masculino</option>
+                  <option value="1">Femenino</option>
+                  <option value="2">Otro</option>
                 </Input>
               </FormGroup>
             </Col>
@@ -119,11 +144,11 @@ export class NewPaciente extends Component {
                   id="Triage"
                   onChange={(e) => this.handleChange(e)}
                 >
-                  <option value="0">Seleccione...</option>
-                  <option value="1">Atención Inmediata</option>
-                  <option value="2">Riesgo Vital</option>
-                  <option value="3">Urgencia Menor</option>
-                  <option value="4">No Urgencia</option>
+                  <option value="4">Seleccione...</option>
+                  <option value="0">Atención Inmediata</option>
+                  <option value="1">Riesgo Vital</option>
+                  <option value="2">Urgencia Menor</option>
+                  <option value="3">No Urgencia</option>
                 </Input>
               </FormGroup>
             </Col>
@@ -139,6 +164,8 @@ export class NewPaciente extends Component {
               </FormGroup>
             </Col>
             <Button>Registrar</Button>
+            {"  "}
+            <Button onClick={this.IrPaciente.bind(this)}>Cancelar</Button>
           </Form>
         </Container>
       </div>

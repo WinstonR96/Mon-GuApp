@@ -18,6 +18,24 @@ const Util = {
     });
   },
 
+  AlertaUsuarioRegistrado: () => {
+    Swal.fire({
+      icon: "success",
+      text: "Datos registrados correctamente",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#0C7DED",
+    });
+  },
+
+  AlertaDatosIncompletos: () => {
+    Swal.fire({
+      title: "Información incompleta",
+      text: "Digite Campo vacio",
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+  },
+
   GuardarSesion: (data) => {
     localStorage.setItem("Data", JSON.stringify(data));
   },

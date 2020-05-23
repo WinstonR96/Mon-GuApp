@@ -12,26 +12,26 @@ namespace Mon_GuApp.Interfaces
         /// <summary>
         /// Agrega un paciente
         /// </summary>
-        /// <param name="user">informacion del usuario</param>
+        /// <param name="user">informacion del paciente</param>
         public Paciente Add(Paciente user);
 
         /// <summary>
         /// Obtiene un paciente
         /// </summary>
-        /// <param name="id">id del usuario</param>
-        /// <returns>retorna el usuario solicitado</returns>
+        /// <param name="id">id del paciente</param>
+        /// <returns>retorna el paciente solicitado</returns>
         public Task<Paciente> Get(int id);
 
         /// <summary>
         /// Obtiene todos los pacientes
         /// </summary>
-        /// <returns>retorna un listado de usuarios</returns>
+        /// <returns>retorna un listado de paciente</returns>
         public List<Paciente> GetPacientes();
 
         /// <summary>
         /// Actualiza el estado de un paciente
         /// </summary>
-        /// <param name="data">informacion del usuario a actualizar</param>
+        /// <param name="data">informacion del paciente a actualizar</param>
         public void Update(EstadoPaciente data);
     }
 }

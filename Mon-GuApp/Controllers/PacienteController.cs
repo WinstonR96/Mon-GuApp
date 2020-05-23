@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
 using Mon_GuApp.Models;
+using Mon_GuApp.Models.DTOs.Response;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,41 @@ namespace Mon_GuApp.Controllers
         /// <summary>
         /// Obtener todos los pacientes
         /// </summary>
-        /// <returns>retorna un listado de usuarios</returns>
+        /// <returns>retorna un listado de paciente</returns>
         [HttpGet]
         public ActionResult<List<Paciente>> GetUsers()
         {
             return _pacienteService.GetPacientes();
+        }
+
+        /// <summary>
+        /// Agregar nuevo paciente
+        /// </summary>
+        /// <param name="data">Informacion del nuevo paciente</param>
+        /// <returns>Si es exitoso retorna el nuevo paciente, sino retorna el error</returns>
+        [HttpPost]
+        public IActionResult Add([FromBody] Paciente data)
+        {
+            if (data == null)
+                return BadRequest();
+
+            try
+            {
+                var user = _pacienteService.Add(data);
+                return Ok(new ResponseDTO()
+                {
+                    message = "Paciente creado",
+                    type = "I"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseDTO()
+                {
+                    message = ex.Message,
+                    type = "E"
+                });
+            }
         }
     }
 }

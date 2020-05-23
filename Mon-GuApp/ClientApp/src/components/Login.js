@@ -48,22 +48,26 @@ export class Login extends Component {
   submitForm(e) {
     e.preventDefault();
     const { cedula, password } = this.state;
-    var data = {
-      user: {
-        cedula,
-        password,
-      },
-    };
-    Service.post("api/v1/auth/login", data)
-      .then((response) => {
-        if (response.data.token) {
-          Util.GuardarSesion(response.data);
-          this.Home();
-        }
-      })
-      .catch((err) => {
-        Util.AlertaDatosIncorrectos();
-      });
+    if (cedula && password) {
+      var data = {
+        user: {
+          cedula,
+          password,
+        },
+      };
+      Service.post("api/v1/auth/login", data)
+        .then((response) => {
+          if (response.data.token) {
+            Util.GuardarSesion(response.data);
+            this.Home();
+          }
+        })
+        .catch((err) => {
+          Util.AlertaDatosIncorrectos();
+        });
+    } else {
+      Util.AlertaDatosIncompletos();
+    }
   }
 
   Home = () => {

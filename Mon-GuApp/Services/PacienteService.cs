@@ -15,7 +15,25 @@ namespace Mon_GuApp.Services
     {
         public Paciente Add(Paciente user)
         {
-            throw new NotImplementedException();
+            using (var ctx = DbContext.GetInstance())
+            {
+                SQLiteCommand insertPaciente = new SQLiteCommand();
+                insertPaciente.Connection = ctx;
+                insertPaciente.CommandText = "INSERT INTO Paciente(Cedula,Nombres,Edad,Sexo,Triage,Sintomas,Estado) VALUES (@Cedula,@Nombres,@Edad,@Sexo,@Triage,@Sintomas,@Estado)";
+                insertPaciente.Parameters.AddWithValue("@Cedula", user.Cedula);
+                insertPaciente.Parameters.AddWithValue("@Nombres", user.Nombres);
+                insertPaciente.Parameters.AddWithValue("@Edad", user.Edad);
+                insertPaciente.Parameters.AddWithValue("@Sexo", user.Sexo);
+                insertPaciente.Parameters.AddWithValue("@Triage", user.Triage);
+                insertPaciente.Parameters.AddWithValue("@Sintomas", user.Sintomas);
+                insertPaciente.Parameters.AddWithValue("@Estado", Estado.En_Espera);
+                var result = insertPaciente.ExecuteNonQuery();
+                if(result > 0)
+                {
+                    return user;
+                }
+            }
+            return null;
         }
 
         public Task<Paciente> Get(int id)

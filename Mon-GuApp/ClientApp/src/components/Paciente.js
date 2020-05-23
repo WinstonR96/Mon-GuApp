@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Table } from "reactstrap";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiFillHome } from "react-icons/ai";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
-// import pacientes from "./paciente.json";
 
 export class Paciente extends Component {
   static displayname = Paciente.name;
@@ -17,17 +16,16 @@ export class Paciente extends Component {
   }
 
   componentDidMount() {
-    this.cargarPaciente();
-    // let result = this.ComprobarSesion();
-    // console.log(result);
-    // if (!result) {
-    //   this.props.history.push({
-    //     pathname: "/",
-    //   });
-    // } else {
-    //   this.cargarPaciente();
-    //   console.log("Pacientes", this.state.pacientes);
-    // }
+    let result = this.ComprobarSesion();
+    console.log(result);
+    if (!result) {
+      this.props.history.push({
+        pathname: "/",
+      });
+    } else {
+      this.cargarPaciente();
+      console.log("Pacientes", this.state.pacientes);
+    }
   }
 
   static RenderTabla(pacientes) {
@@ -77,6 +75,12 @@ export class Paciente extends Component {
     });
   };
 
+  Home = () => {
+    this.props.history.push({
+      pathname: "/home",
+    });
+  };
+
   render() {
     let contents = this.state.loading ? (
       <p>
@@ -92,6 +96,10 @@ export class Paciente extends Component {
             <Col>
               <Button outline color="secondary" onClick={this.NuevoPaciente}>
                 <AiOutlineUserAdd /> Registrar Paciente
+              </Button>
+              {"  "}
+              <Button outline color="secondary" onClick={this.Home}>
+                <AiFillHome /> Regresar
               </Button>
             </Col>
           </Row>

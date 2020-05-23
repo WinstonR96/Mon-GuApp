@@ -8,7 +8,14 @@
             <summary>
             Obtener todos los pacientes
             </summary>
-            <returns>retorna un listado de usuarios</returns>
+            <returns>retorna un listado de paciente</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.PacienteController.Add(Mon_GuApp.Models.Paciente)">
+            <summary>
+            Agregar nuevo paciente
+            </summary>
+            <param name="data">Informacion del nuevo paciente</param>
+            <returns>Si es exitoso retorna el nuevo paciente, sino retorna el error</returns>
         </member>
         <member name="P:Mon_GuApp.Helpers.LoggerApp.GetLogger">
             <summary>
@@ -56,26 +63,26 @@
             <summary>
             Agrega un paciente
             </summary>
-            <param name="user">informacion del usuario</param>
+            <param name="user">informacion del paciente</param>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Get(System.Int32)">
             <summary>
             Obtiene un paciente
             </summary>
-            <param name="id">id del usuario</param>
-            <returns>retorna el usuario solicitado</returns>
+            <param name="id">id del paciente</param>
+            <returns>retorna el paciente solicitado</returns>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.GetPacientes">
             <summary>
             Obtiene todos los pacientes
             </summary>
-            <returns>retorna un listado de usuarios</returns>
+            <returns>retorna un listado de paciente</returns>
         </member>
         <member name="M:Mon_GuApp.Interfaces.IPacienteService.Update(Mon_GuApp.Models.DTOs.Request.EstadoPaciente)">
             <summary>
             Actualiza el estado de un paciente
             </summary>
-            <param name="data">informacion del usuario a actualizar</param>
+            <param name="data">informacion del paciente a actualizar</param>
         </member>
         <member name="T:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO">
             <summary>
