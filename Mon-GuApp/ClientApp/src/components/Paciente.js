@@ -4,6 +4,7 @@ import { AiOutlineUserAdd, AiFillHome } from "react-icons/ai";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
 import { Link } from "react-router-dom";
+import Loading from "./Global/Loading";
 
 export class Paciente extends Component {
   static displayname = Paciente.name;
@@ -97,9 +98,10 @@ export class Paciente extends Component {
 
   render() {
     let contents = this.state.loading ? (
-      <p>
-        <em>Loading...</em>
-      </p>
+      // <p>
+      //   <em>Loading...</em>
+      // </p>
+      <Loading />
     ) : (
       Paciente.RenderTabla(this.state.data)
     );

@@ -4,6 +4,7 @@ import { AiOutlineUserAdd, AiFillDelete, AiFillHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
+import Loading from "./Global/Loading";
 
 export class Consultorio extends Component {
   static displayname = Consultorio.name;
@@ -78,9 +79,10 @@ export class Consultorio extends Component {
         </Container>
         <br />
         {this.state.loading ? (
-          <p>
-            <em>Loading...</em>
-          </p>
+          // <p>
+          //   <em>Loading...</em>
+          // </p>
+          <Loading />
         ) : (
           <Table>
             <thead>
