@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mon-GuApp</name>
+    </assembly>
+    <members>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.GetConsultorio(System.Int32)">
+            <summary>
+            Obtener un paciente en atencion
+            </summary>
+            <param name="id">id del consultorio a consultar</param>
+            <returns>retorna un paciente en consultorio</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioLlamaPaciente)">
+            <summary>
+            Procesar una atencion
+            </summary>
+            <param name="data">Informacion requerida para llamar un paciente</param>
+            
+        </member>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.Update(Mon_GuApp.Models.DTOs.Request.PacienteAltaDTO)">
+            <summary>
+            Dar de alta
+            </summary>
+            <param name="data">Informacion requerida para dar de alta a un paciente</param>
+            
+        </member>
+        <member name="M:Mon_GuApp.Controllers.AuthController.Login(Mon_GuApp.Models.DTOs.Request.LoginRequestDTO)">
+            <summary>
+            Realizar Login en el sistema
+            </summary>
+            <param name="data">Informacion para verificar</param>
+            <returns>Retorna Token del usuario si la verificacion es correcta</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorios">
+            <summary>
+            Obtener todos los consultorios
+            </summary>
+            <returns>retorna un listado de consultorios</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorio(System.Int32)">
+            <summary>
+            Obtener un consultorio
+            </summary>
+            <param name="id">id del consultorio a consultar</param>
+            <returns>retorna un consultorio</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.Delete(System.Int32)">
+            <summary>
+            elimina un consultorio
+            </summary>
+            <param name="id">id del consultorio a eliminar</param>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.ConsultorioController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioAddDTO)">
+            <summary>
+            Agregar nuevo consultorio
+            </summary>
+            <param name="data">Informacion del nuevo consultorio</param>
+            
+        </member>
+        <member name="M:Mon_GuApp.Controllers.MedicoController.GetConsultorios">
+            <summary>
+            Obtener todos los medicos disponibles
+            </summary>
+            <returns>retorna un listado de medicos disponible</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.PacienteController.GetUsers">
+            <summary>
+            Obtener todos los pacientes
+            </summary>
+            <returns>retorna un listado de paciente</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.PacienteController.Add(Mon_GuApp.Models.Paciente)">
+            <summary>
+            Agregar nuevo paciente
+            </summary>
+            <param name="data">Informacion del nuevo paciente</param>
+            <returns>Si es exitoso retorna el nuevo paciente, sino retorna el error</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.PruebaController.SubirPrueba(Mon_GuApp.Models.DTOs.Request.SubirPruebaDTO)">
+            <summary>
+            Permite subir una prueba y almacenarla en el servidor para luego hacer la verificación
+            </summary>
+            <param name="file">Datos para subir el archivo al servidor</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mon_GuApp.Helpers.LoggerApp.GetLogger">
+            <summary>
+            Obtiene la instancia actual
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Helpers.LoggerApp.Instance">
+            <summary>
+            Obtiene la instancia actual de la clase.
+            </summary>
+        </member>
+        <member name="M:Mon_GuApp.Helpers.LoggerApp.#ctor(System.String)">
+            <summary>
+            Configura log con nombre de archivo
+            </summary>
+        </member>
+        <member name="T:Mon_GuApp.Helpers.Utils">
+            <summary>
+            Clase Utils, Helper que contiene metodos de uso general
+            </summary>
+        </member>
+        <member name="M:Mon_GuApp.Helpers.Utils.GetSHA256(System.String)">
+            <summary>
+            Genera SHA256 de un string
+            </summary>
+            <param name="str">Cadena a encriptar</param>
+            <returns>retorna Hash de la cadena</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IAuthService.Authenticate(Mon_GuApp.Models.DTOs.Request.LoginRequestDTO,System.Boolean@)">
+            <summary>
+            Metodo para realizar la autenticacion del usuario
+            </summary>
+            <param name="data">Datos para hacer el login [email][password]</param>
+            <returns>retorna el usuario y token jwt, sino el mensaje de error</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IAuthService.GenerateToken(Mon_GuApp.Models.Medico,System.String)">
+            <summary>
+            Permite generar el token JWT
+            </summary>
+            <param name="user">Usuario que intenta loguear</param>
+            <param name="secretKey">Clave secreta</param>
+            <returns>retorna el token JWT</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IConsultorioService.GetConsultorios">
+            <summary>
+            Obtiene todos los consultorios
+            </summary>
+            <returns>retorna un listado de consultorios</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Add(Mon_GuApp.Models.Paciente)">
+            <summary>
+            Agrega un paciente
+            </summary>
+            <param name="user">informacion del paciente</param>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Get(System.Int32)">
+            <summary>
+            Obtiene un paciente
+            </summary>
+            <param name="id">id del paciente</param>
+            <returns>retorna el paciente solicitado</returns>
+        </member>
+        <member name="M:Mon_GuApp.Interfaces.IPacienteService.GetPacientes">
+            <summary>
+            Obtiene todos los pacientes
+            </summary>
+            <returns>retorna un listado de paciente</returns>
+        </member>
+        <member name="T:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO">
+            <summary>
+            DTO para el response del login
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO.data">
+            <summary>
+            Objeto a retornar
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseDTO.type">
+            <summary>
+            Tipo de mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseDTO.message">
+            <summary>
+            Mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.type">
+            <summary>
+            Tipo de mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.message">
+            <summary>
+            Mensaje
+            </summary>
+        </member>
+        <member name="P:Mon_GuApp.Models.DTOs.Response.ResponseObjectDTO.data">
+            <summary>
+            Objeto
+            </summary>
+        </member>
+    </members>
+</doc>
