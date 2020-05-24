@@ -17,7 +17,7 @@ namespace Mon_GuApp.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize]
-    public class AtencionController: ControllerBase
+    public class AtencionController : ControllerBase
     {
         private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AtencionController>();
         private readonly IConfiguration _configuration;
@@ -55,7 +55,7 @@ namespace Mon_GuApp.Controllers
 
             try
             {
-                
+
                 var res = _atencionService.LlamarPaciente(data, out mensaje, out p);
                 if (res)
                 {
@@ -75,6 +75,39 @@ namespace Mon_GuApp.Controllers
                     });
                 }
 
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseDTO()
+                {
+                    message = ex.Message,
+                    type = "E"
+                });
+            }
+        }
+
+        /// <summary>
+        /// Dar de alta
+        /// </summary>
+        /// <param name="data">Informacion requerida para dar de alta a un paciente</param>
+        /// 
+        [HttpPut]
+        public IActionResult Update([FromBody] PacienteAltaDTO data)
+        {
+            string mensaje = "";
+            if (data == null)
+                return BadRequest();
+
+            try
+            {
+
+                var res = _atencionService.DarAltaPaciente(data.Id, out mensaje);
+
+                return Ok(new ResponseDTO()
+                {
+                    message = mensaje,
+                    type = "I"
+                });
             }
             catch (Exception ex)
             {

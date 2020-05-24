@@ -18,6 +18,13 @@
             <param name="data">Informacion requerida para llamar un paciente</param>
             
         </member>
+        <member name="M:Mon_GuApp.Controllers.AtencionController.Update(Mon_GuApp.Models.DTOs.Request.PacienteAltaDTO)">
+            <summary>
+            Dar de alta
+            </summary>
+            <param name="data">Informacion requerida para dar de alta a un paciente</param>
+            
+        </member>
         <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorios">
             <summary>
             Obtener todos los consultorios

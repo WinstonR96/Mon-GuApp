@@ -52,7 +52,7 @@ namespace Mon_GuApp.Services
             var result = new List<Paciente>();
             using (var ctx = DbContext.GetInstance())
             {
-                var Query = "SELECT * FROM Paciente WHERE Estado <= 2 ORDER BY TRIAGE, Id;";
+                var Query = "SELECT * FROM Paciente ORDER BY TRIAGE, Id;";
                 using (var comando = new SQLiteCommand(Query, ctx))
                 using (var reader = comando.ExecuteReader())
                 {

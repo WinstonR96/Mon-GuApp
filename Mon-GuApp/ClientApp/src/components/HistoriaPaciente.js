@@ -77,6 +77,24 @@ export class HistoriaPaciente extends Component {
       .catch((error) => console.log(error));
   }
 
+  DarAlta = () => {
+    let token = Util.ObtenerToken();
+    const { paciente } = this.state;
+    var data = {
+      id: paciente.id,
+    };
+    Service.put("api/v1/atencion", data, token)
+      .then((response) => {
+        Util.AlertaGenericaInfo(response.message);
+        setTimeout(() => {
+          this.props.history.push({
+            pathname: "/consultorio",
+          });
+        }, 1000);
+      })
+      .catch((err) => console.log(err));
+  };
+
   Home = () => {
     this.props.history.push({
       pathname: "/consultorio",
@@ -122,7 +140,7 @@ export class HistoriaPaciente extends Component {
             <Button onClick={this.MostrarPanel.bind(this)}>
               {this.state.ValueButton}
             </Button>{" "}
-            <Button>Dar de alta</Button>
+            <Button onClick={this.DarAlta.bind(this)}>Dar de alta</Button>
           </CardFooter>
         </Card>
         <br />

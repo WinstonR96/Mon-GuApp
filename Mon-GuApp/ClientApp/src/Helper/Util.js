@@ -63,6 +63,22 @@ const Util = {
     });
   },
 
+  AlertaGenericaInfo: (mensaje) => {
+    Swal.fire({
+      text: mensaje,
+      icon: "info",
+      confirmButtonText: "Ok",
+    });
+  },
+
+  AlertaGenericaError: (mensaje) => {
+    Swal.fire({
+      text: mensaje,
+      icon: "error",
+      confirmButtonText: "Ok",
+    });
+  },
+
   AlertaLlamarPaciente: (mensaje) => {
     Swal.fire({
       text: mensaje,

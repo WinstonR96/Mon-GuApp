@@ -9,9 +9,72 @@ using Mon_GuApp.Enums;
 
 namespace Mon_GuApp.Services
 {
-    public class AtencionService: IAtencionService
+    public class AtencionService : IAtencionService
     {
         private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AtencionService>();
+
+        public bool DarAltaPaciente(string id, out string mensaje)
+        {
+            log.Information("Dando de alta al paciente");
+            bool res = false;
+            Consultorio consultorio = new Consultorio();
+            using (var ctx = DbContext.GetInstance())
+            {
+                //Actualizamos el estado del paciente
+                SQLiteCommand estadoPaciente = new SQLiteCommand();
+                estadoPaciente.Connection = ctx;
+                estadoPaciente.CommandText = "UPDATE Paciente SET Estado = @Estado, Triage = @nuevoTriage WHERE Id = @Id";
+                estadoPaciente.Parameters.AddWithValue("@Estado", Enums.EstadoPaciente.Recuperado);
+                estadoPaciente.Parameters.AddWithValue("@nuevoTriage", Enums.Triage.Fuera);
+                estadoPaciente.Parameters.AddWithValue("@Id", id);
+                var resultadoEstadoPaciente = estadoPaciente.ExecuteNonQuery();
+                if (resultadoEstadoPaciente > 0)
+                {
+                    //Actualizamos el estado del consultorio
+                    SQLiteCommand estadoConsultorio = new SQLiteCommand();
+                    estadoConsultorio.Connection = ctx;
+                    estadoConsultorio.CommandText = "UPDATE Consultorio SET Estado = @NuevoEstado WHERE Id = (SELECT c.Id FROM Atencion AS a INNER JOIN Consultorio AS c ON c.Id = a.Id_consultorio WHERE a.Estado = @EstadoAtencion AND a.Id_paciente = @paciente_id)";
+                    estadoConsultorio.Parameters.AddWithValue("@NuevoEstado", Enums.EstadoConsultorio.Disponible);
+                    estadoConsultorio.Parameters.AddWithValue("@EstadoAtencion", Enums.EstadoAtencion.Iniciada);
+                    estadoConsultorio.Parameters.AddWithValue("@paciente_id", id);
+                    var resultadoEstadoConsultorio = estadoConsultorio.ExecuteNonQuery();
+                    if (resultadoEstadoConsultorio > 0)
+                    {
+                        //Actualizamos el estado de la consulta
+                        SQLiteCommand estadoConsulta = new SQLiteCommand();
+                        estadoConsulta.Connection = ctx;
+                        estadoConsulta.CommandText = "UPDATE Atencion SET Estado = @EstadoNuevo WHERE Id_paciente = @Id_paciente AND Estado = @EstadoViejo";
+                        estadoConsulta.Parameters.AddWithValue("@EstadoNuevo", Enums.EstadoAtencion.Terminada);
+                        estadoConsulta.Parameters.AddWithValue("@EstadoViejo", Enums.EstadoAtencion.Iniciada);
+                        estadoConsulta.Parameters.AddWithValue("@Id_paciente", id);
+                        var resultadoEstadoConsulta = estadoConsulta.ExecuteNonQuery();
+                        if (resultadoEstadoConsulta > 0)
+                        {
+                            res = true;
+                            mensaje = "Paciente dado de alta";
+                            log.Information(mensaje);
+                        }
+                        else
+                        {
+                            mensaje = "No se pudo actualizar el estado de la consulta";
+                            log.Information(mensaje);
+                        }
+                    }
+                    else
+                    {
+                        mensaje = "No se pudo actualizar el estado del consultorio";
+                        log.Information(mensaje);
+                    }
+                }
+                else
+                {
+                    mensaje = "No se pudo actualizar el estado del paciente";
+                    log.Information(mensaje);
+                }
+            }
+            return res;
+        }
+
         public bool LlamarPaciente(ConsultorioLlamaPaciente data, out string mensaje, out Paciente dataPaciente)
         {
             log.Information("Llamando paciente");
@@ -58,7 +121,7 @@ namespace Mon_GuApp.Services
                             estadopaciente.Parameters.AddWithValue("@Id_paciente", paciente.Id);
                             estadopaciente.Parameters.AddWithValue("@Estado", Enums.EstadoPaciente.En_Atencion);
                             var resultadoActualizacion = estadopaciente.ExecuteNonQuery();
-                            if(resultadoActualizacion > 0)
+                            if (resultadoActualizacion > 0)
                             {
                                 //Se actualiza el estado del consultorio a ocupado
                                 SQLiteCommand estadoConsultorio = new SQLiteCommand();
@@ -90,7 +153,7 @@ namespace Mon_GuApp.Services
                             mensaje = "Se produjo un error agendando la atencion";
                             log.Information(mensaje);
                         }
-                        
+
                     }
                     else
                     {
@@ -98,7 +161,7 @@ namespace Mon_GuApp.Services
                         log.Information(mensaje);
                     }
                 }
-                
+
             }
             dataPaciente = paciente;
             return res;

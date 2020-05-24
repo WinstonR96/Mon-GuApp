@@ -12,5 +12,7 @@ namespace Mon_GuApp.Interfaces
         public bool LlamarPaciente(ConsultorioLlamaPaciente data, out string mensaje, out Paciente dataPaciente);
 
         public Paciente ObtenerPacienteEnConsulta(int id);
+
+        public bool DarAltaPaciente(string id, out string mensaje);
     }
 }
