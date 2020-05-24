@@ -30,7 +30,15 @@ namespace Mon_GuApp.Controllers
         [HttpPost]
         public ActionResult SubirPrueba([FromBody] SubirPruebaDTO file)
         {
-            _pruebaService.SubirArchivo(file);
+            try
+            {
+                var ADN_MON_GUA_V2 = _configuration.GetValue<string>("ADN_MON_GUA_V2");
+                var data = _pruebaService.SubirArchivo(file);
+                var resultado = _pruebaService.ProcesarPrueba(data, ADN_MON_GUA_V2);
+            }catch(Exception ex)
+            {
+
+            }
             return Ok();
         }
     }

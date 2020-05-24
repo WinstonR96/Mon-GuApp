@@ -8,6 +8,7 @@ namespace Mon_GuApp.Interfaces
 {
     public interface IPruebaService
     {
-        public void SubirArchivo(SubirPruebaDTO data);
+        public string SubirArchivo(SubirPruebaDTO data);
+        public bool ProcesarPrueba(string prueba, string ADN_MON_GUA_V2);
     }
 }

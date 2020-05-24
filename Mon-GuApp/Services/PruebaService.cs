@@ -10,7 +10,21 @@ namespace Mon_GuApp.Services
 {
     public class PruebaService : IPruebaService
     {
-        public void SubirArchivo(SubirPruebaDTO data)
+        public bool ProcesarPrueba(string prueba, string ADN_MON_GUA_V2)
+        {
+            //string ADN_MON_GUA_V2 = "TTCGGAGTAACACGCCTATAGGCGTGTTACTCCGAA";
+            string ADN = File.ReadAllText(prueba);
+            if (ADN.Contains(ADN_MON_GUA_V2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string SubirArchivo(SubirPruebaDTO data)
         {
             string dataFile = data.file.Substring(data.file.LastIndexOf(',') + 1);
             string path = @"C:\monguapp\PruebasADN\";
@@ -22,6 +36,7 @@ namespace Mon_GuApp.Services
             string file = path + FileName;
             byte[] tempBytes = Convert.FromBase64String(dataFile);
             File.WriteAllBytes(file, tempBytes);
+            return file;
         }
     }
 }
