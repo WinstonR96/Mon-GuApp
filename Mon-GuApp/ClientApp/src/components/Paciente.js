@@ -77,7 +77,9 @@ export class Paciente extends Component {
     let token = Util.ObtenerToken();
     Service.get("api/v1/paciente", token)
       .then((data) => this.setState({ data, loading: false }))
-      .catch((err) => console.log("error", err));
+      .catch((err) => {
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   }
 
   ComprobarSesion() {
@@ -98,9 +100,6 @@ export class Paciente extends Component {
 
   render() {
     let contents = this.state.loading ? (
-      // <p>
-      //   <em>Loading...</em>
-      // </p>
       <Loading />
     ) : (
       Paciente.RenderTabla(this.state.data)

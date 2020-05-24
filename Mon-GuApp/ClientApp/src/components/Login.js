@@ -11,6 +11,7 @@ import {
 import "./Login.css";
 import Service from "./../Services/Service";
 import Util from "./../Helper/Util";
+import Loading from "./Global/Loading";
 
 export class Login extends Component {
   static displayName = Login.name;
@@ -36,6 +37,13 @@ export class Login extends Component {
     return Util.ComprobarSesionActiva();
   }
 
+  //Funciones
+  HandleSpinner = () => {
+    this.setState({
+      loading: !this.state.loading,
+    });
+  };
+
   handleChange = async (event) => {
     const { target } = event;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -49,6 +57,7 @@ export class Login extends Component {
     e.preventDefault();
     const { cedula, password } = this.state;
     if (cedula && password) {
+      this.HandleSpinner();
       var data = {
         user: {
           cedula,
@@ -59,10 +68,12 @@ export class Login extends Component {
         .then((response) => {
           if (response.data.token) {
             Util.GuardarSesion(response.data);
+            this.HandleSpinner();
             this.Home();
           }
         })
         .catch((err) => {
+          this.HandleSpinner();
           Util.AlertaDatosIncorrectos();
         });
     } else {
@@ -79,6 +90,7 @@ export class Login extends Component {
   render() {
     return (
       <div>
+        {this.state.loading ? <Loading /> : null}
         <Container className="App">
           <h2>Iniciar Sesion</h2>
           <Form className="form" onSubmit={(e) => this.submitForm(e)}>

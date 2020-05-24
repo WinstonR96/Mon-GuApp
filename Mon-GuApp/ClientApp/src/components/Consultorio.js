@@ -42,7 +42,9 @@ export class Consultorio extends Component {
     let token = Util.ObtenerToken();
     Service.get("api/v1/consultorio", token)
       .then((consultorios) => this.setState({ consultorios, loading: false }))
-      .catch((err) => console.log("error", err));
+      .catch((err) => {
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   }
 
   NuevoConsultorio = () => {
@@ -55,10 +57,16 @@ export class Consultorio extends Component {
     let token = Util.ObtenerToken();
     Service.delete(`api/v1/consultorio/${codigo}`, token)
       .then((response) => {
-        window.location.reload(true);
-        Util.AlertaConsultorioEliminado();
+        if (response.type === "I") {
+          window.location.reload(true);
+          Util.AlertaConsultorioEliminado();
+        } else {
+          Util.AlertaGenericaInfo("No se pudo eliminar");
+        }
       })
-      .catch((err) => console.log("error", err));
+      .catch((err) => {
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   };
 
   render() {
@@ -79,9 +87,6 @@ export class Consultorio extends Component {
         </Container>
         <br />
         {this.state.loading ? (
-          // <p>
-          //   <em>Loading...</em>
-          // </p>
           <Loading />
         ) : (
           <Table>

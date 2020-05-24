@@ -11,6 +11,7 @@ import {
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
 import { AiFillHome } from "react-icons/ai";
+import Loading from "./Global/Loading";
 
 export class DetalleConsultorio extends Component {
   static displayname = DetalleConsultorio.name;
@@ -19,6 +20,7 @@ export class DetalleConsultorio extends Component {
     super(props);
     this.state = {
       consultorio: {},
+      loading: false,
     };
   }
 
@@ -33,18 +35,33 @@ export class DetalleConsultorio extends Component {
     }
   }
 
+  //Funciones
+  HandleSpinner = () => {
+    this.setState({
+      loading: !this.state.loading,
+    });
+  };
+
   ComprobarSesion() {
     return Util.ComprobarSesionActiva();
   }
 
   CargarConsultorio() {
+    this.HandleSpinner();
     let token = Util.ObtenerToken();
     Service.get(`api/v1/consultorio/${this.props.location.state.Codigo}`, token)
-      .then((consultorio) => this.setState({ consultorio }))
-      .catch((err) => console.log("error", err));
+      .then((consultorio) => {
+        this.HandleSpinner();
+        this.setState({ consultorio });
+      })
+      .catch((err) => {
+        this.HandleSpinner();
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   }
 
   LlamarPaciente = () => {
+    this.HandleSpinner();
     const { consultorio } = this.state;
     let token = Util.ObtenerToken();
     var data = {
@@ -52,15 +69,23 @@ export class DetalleConsultorio extends Component {
     };
     Service.post("api/v1/atencion", data, token)
       .then((response) => {
-        let informacion = `${
-          response.message + " con el paciente " + response.data.nombres
-        }`;
-        Util.AlertaLlamarPaciente(informacion);
-        setTimeout(() => {
-          window.location.reload(true);
-        }, 1000);
+        this.HandleSpinner();
+        if (response.type === "I") {
+          let informacion = `${
+            response.message + " con el paciente " + response.data.nombres
+          }`;
+          Util.AlertaLlamarPaciente(informacion);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 1000);
+        } else {
+          Util.AlertaGenericaError("No se pudo llamar un paciente");
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.HandleSpinner();
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   };
 
   Home = () => {
@@ -81,6 +106,7 @@ export class DetalleConsultorio extends Component {
     const { consultorio } = this.state;
     return (
       <div>
+        {this.state.loading ? <Loading /> : null}
         <Button outline color="secondary" onClick={this.Home}>
           <AiFillHome /> Regresar
         </Button>

@@ -75,9 +75,9 @@ export class HistoriaPaciente extends Component {
           this.HandleSpinner();
           console.log(response);
         })
-        .catch((error) => {
+        .catch((err) => {
           this.HandleSpinner();
-          console.log(error);
+          Util.AlertaGenericaError("Ocurrio un error");
         });
     } else {
       Util.AlertaGenericaError("Suba una prueba de adn");

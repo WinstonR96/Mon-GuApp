@@ -8,6 +8,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import Loading from "./Global/Loading";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
 
@@ -37,6 +38,13 @@ export class NewPaciente extends Component {
     }
   }
 
+  //Funciones
+  HandleSpinner = () => {
+    this.setState({
+      loading: !this.state.loading,
+    });
+  };
+
   ComprobarSesion() {
     return Util.ComprobarSesionActiva();
   }
@@ -55,6 +63,7 @@ export class NewPaciente extends Component {
     let token = Util.ObtenerToken();
     const { Cedula, Nombres, Edad, Sexo, Triage, Sintomas } = this.state;
     if (Cedula && Nombres && Edad && Sexo && Triage && Sintomas) {
+      this.HandleSpinner();
       var data = {
         cedula: Cedula,
         nombres: Nombres,
@@ -65,10 +74,16 @@ export class NewPaciente extends Component {
       };
       Service.post("api/v1/paciente", data, token)
         .then((response) => {
-          Util.AlertaUsuarioRegistrado();
-          this.IrPaciente();
+          if (response.type === "I") {
+            Util.AlertaUsuarioRegistrado();
+            this.IrPaciente();
+          } else {
+            Util.AlertaGenericaInfo("No se pudo registrar");
+          }
         })
-        .catch((err) => console.log("error", err));
+        .catch((err) => {
+          Util.AlertaGenericaError("Ocurrio un error");
+        });
     } else {
       Util.AlertaDatosIncompletos();
     }

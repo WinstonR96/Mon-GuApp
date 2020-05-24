@@ -41,7 +41,9 @@ export class NewConsultorio extends Component {
     let token = Util.ObtenerToken();
     Service.get("/api/v1/medico", token)
       .then((medicos) => this.setState({ medicos }))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        Util.AlertaGenericaError("Ocurrio un error");
+      });
   }
 
   ComprobarSesion() {
@@ -68,10 +70,16 @@ export class NewConsultorio extends Component {
       let token = Util.ObtenerToken();
       Service.post("api/v1/consultorio", data, token)
         .then((response) => {
-          Util.AlertaConsultorioRegistrado();
-          this.IrConsultorio();
+          if (response.type === "I") {
+            Util.AlertaConsultorioRegistrado();
+            this.IrConsultorio();
+          } else {
+            Util.AlertaGenericaInfo("No se pudo registrar");
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          Util.AlertaGenericaError("Ocurrio un error");
+        });
     } else {
       Util.AlertaDatosIncompletos();
     }
