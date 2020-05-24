@@ -1,5 +1,6 @@
 ﻿using Mon_GuApp.Models;
 using Mon_GuApp.Models.DTOs.Request;
+using Mon_GuApp.Models.DTOs.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,6 @@ namespace Mon_GuApp.Interfaces
         /// Obtiene todos los pacientes
         /// </summary>
         /// <returns>retorna un listado de paciente</returns>
-        public List<Paciente> GetPacientes();
-
-        /// <summary>
-        /// Actualiza el estado de un paciente
-        /// </summary>
-        /// <param name="data">informacion del paciente a actualizar</param>
-        public void Update(EstadoPaciente data);
+        public List<ListadoPacientes> GetPacientes();
     }
 }

@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Table } from "reactstrap";
 import { AiOutlineUserAdd, AiFillHome } from "react-icons/ai";
 import Util from "./../Helper/Util";
 import Service from "./../Services/Service";
+import { Link } from "react-router-dom";
 
 export class Paciente extends Component {
   static displayname = Paciente.name;
@@ -10,7 +11,7 @@ export class Paciente extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pacientes: [],
+      data: [],
       loading: true,
     };
   }
@@ -26,7 +27,8 @@ export class Paciente extends Component {
     }
   }
 
-  static RenderTabla(pacientes) {
+  static RenderTabla(data) {
+    console.log(data);
     return (
       <Table>
         <thead>
@@ -38,18 +40,31 @@ export class Paciente extends Component {
             <th>Triage</th>
             <th>Sintomas</th>
             <th>Estado</th>
+            <th>Consultorio</th>
           </tr>
         </thead>
         <tbody>
-          {pacientes.map((paciente) => (
-            <tr key={paciente.id}>
-              <td>{paciente.cedula}</td>
-              <td>{paciente.nombres}</td>
-              <td>{paciente.edad}</td>
-              <td>{paciente.sexo}</td>
-              <td>{paciente.triage}</td>
-              <td>{paciente.sintomas}</td>
-              <td>{paciente.estado}</td>
+          {data.map((dato) => (
+            <tr key={dato.paciente.id}>
+              <td>{dato.paciente.cedula}</td>
+              <td>{dato.paciente.nombres}</td>
+              <td>{dato.paciente.edad}</td>
+              <td>{dato.paciente.sexo}</td>
+              <td>{dato.paciente.triage}</td>
+              <td>{dato.paciente.sintomas}</td>
+              <td>{dato.paciente.estado}</td>
+              {dato.paciente.estado === "En Atencion" ? (
+                <td>
+                  <Link
+                    to={{
+                      pathname: "consultorio/detalle",
+                      state: { Codigo: dato.consultorio.id },
+                    }}
+                  >
+                    {dato.consultorio.codigo}
+                  </Link>
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>
@@ -60,7 +75,7 @@ export class Paciente extends Component {
   async cargarPaciente() {
     let token = Util.ObtenerToken();
     Service.get("api/v1/paciente", token)
-      .then((pacientes) => this.setState({ pacientes, loading: false }))
+      .then((data) => this.setState({ data, loading: false }))
       .catch((err) => console.log("error", err));
   }
 
@@ -86,7 +101,7 @@ export class Paciente extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      Paciente.RenderTabla(this.state.pacientes)
+      Paciente.RenderTabla(this.state.data)
     );
     return (
       <div>

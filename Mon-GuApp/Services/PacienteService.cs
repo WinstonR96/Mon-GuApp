@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
+using Mon_GuApp.Models.DTOs.Response;
 
 namespace Mon_GuApp.Services
 {
@@ -46,39 +47,42 @@ namespace Mon_GuApp.Services
             throw new NotImplementedException();
         }
 
-        public List<Paciente> GetPacientes()
+        public List<ListadoPacientes> GetPacientes()
         {
             log.Information("Obteniendo pacientes");
-            var result = new List<Paciente>();
+            var result = new List<ListadoPacientes>();
             using (var ctx = DbContext.GetInstance())
             {
-                var Query = "SELECT * FROM Paciente ORDER BY TRIAGE, Id;";
+                var Query = "SELECT Paciente.*, Consultorio.Id AS Id_consultorio, Consultorio.Cod_Consultorio AS Codigo FROM Paciente LEFT JOIN Atencion ON Atencion.Id_paciente = Paciente.Id LEFT JOIN Consultorio ON Atencion.Id_consultorio = Consultorio.Id ORDER BY Paciente.Triage, Paciente.Id;";
                 using (var comando = new SQLiteCommand(Query, ctx))
                 using (var reader = comando.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        result.Add(new Paciente
+                        result.Add(new ListadoPacientes()
                         {
-                            Id = reader["Id"].ToString(),
-                            Cedula = reader["Cedula"].ToString(),
-                            Nombres = reader["Nombres"].ToString(),
-                            Edad = reader["Edad"].ToString(),
-                            Sexo = ((Sexo)Convert.ToInt32(reader["Sexo"].ToString())).ToString(),
-                            Triage = ((Triage)Convert.ToInt32(reader["Triage"].ToString())).ToString().Replace("_", " "),
-                            Estado = ((Enums.EstadoPaciente)Convert.ToInt32(reader["Estado"].ToString())).ToString().Replace("_", " "),
-                            Sintomas = reader["Sintomas"].ToString(),
+                            paciente = new Paciente()
+                            {
+                                Id = reader["Id"].ToString(),
+                                Cedula = reader["Cedula"].ToString(),
+                                Nombres = reader["Nombres"].ToString(),
+                                Edad = reader["Edad"].ToString(),
+                                Sexo = ((Sexo)Convert.ToInt32(reader["Sexo"].ToString())).ToString(),
+                                Triage = ((Triage)Convert.ToInt32(reader["Triage"].ToString())).ToString().Replace("_", " "),
+                                Estado = ((Enums.EstadoPaciente)Convert.ToInt32(reader["Estado"].ToString())).ToString().Replace("_", " "),
+                                Sintomas = reader["Sintomas"].ToString(),
+                            },
+                            consultorio = new ConsultorioDTO()
+                            {
+                                Codigo = reader["Codigo"].ToString(),
+                                Id = reader["Id_consultorio"].ToString()
+                            }
                         });
                     }
                     log.Information($"Se encontraron {result.Count} pacientes");
                 }
             }
             return result;
-        }
-
-        public void Update(Models.DTOs.Request.EstadoPaciente data)
-        {
-            throw new NotImplementedException();
         }
     }
 }

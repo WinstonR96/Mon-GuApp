@@ -137,12 +137,6 @@
             </summary>
             <returns>retorna un listado de paciente</returns>
         </member>
-        <member name="M:Mon_GuApp.Interfaces.IPacienteService.Update(Mon_GuApp.Models.DTOs.Request.EstadoPaciente)">
-            <summary>
-            Actualiza el estado de un paciente
-            </summary>
-            <param name="data">informacion del paciente a actualizar</param>
-        </member>
         <member name="T:Mon_GuApp.Models.DTOs.Response.LoginResponseDTO">
             <summary>
             DTO para el response del login

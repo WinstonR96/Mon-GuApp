@@ -33,7 +33,7 @@ namespace Mon_GuApp.Controllers
         /// </summary>
         /// <returns>retorna un listado de paciente</returns>
         [HttpGet]
-        public ActionResult<List<Paciente>> GetUsers()
+        public ActionResult<List<ListadoPacientes>> GetUsers()
         {
             return _pacienteService.GetPacientes();
         }
