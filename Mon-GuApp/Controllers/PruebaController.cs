@@ -66,7 +66,6 @@ namespace Mon_GuApp.Controllers
                     message = "Ocurrio un error procesando la prueba"
                 });
             }
-            return Ok();
         }
     }
 }
