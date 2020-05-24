@@ -8,7 +8,7 @@
             <summary>
             Obtener un paciente en atencion
             </summary>
-            <param name="id">id del consultorio a consultaar</param>
+            <param name="id">id del consultorio a consultar</param>
             <returns>retorna un paciente en consultorio</returns>
         </member>
         <member name="M:Mon_GuApp.Controllers.AtencionController.Add(Mon_GuApp.Models.DTOs.Request.ConsultorioLlamaPaciente)">
@@ -25,6 +25,13 @@
             <param name="data">Informacion requerida para dar de alta a un paciente</param>
             
         </member>
+        <member name="M:Mon_GuApp.Controllers.AuthController.Login(Mon_GuApp.Models.DTOs.Request.LoginRequestDTO)">
+            <summary>
+            Realizar Login en el sistema
+            </summary>
+            <param name="data">Informacion para verificar</param>
+            <returns>Retorna Token del usuario si la verificacion es correcta</returns>
+        </member>
         <member name="M:Mon_GuApp.Controllers.ConsultorioController.GetConsultorios">
             <summary>
             Obtener todos los consultorios
@@ -35,8 +42,8 @@
             <summary>
             Obtener un consultorio
             </summary>
-            <param name="id">id del consultorio a consultaar</param>
-            <returns>retorna un listado de consultorio</returns>
+            <param name="id">id del consultorio a consultar</param>
+            <returns>retorna un consultorio</returns>
         </member>
         <member name="M:Mon_GuApp.Controllers.ConsultorioController.Delete(System.Int32)">
             <summary>
@@ -55,7 +62,7 @@
             <summary>
             Obtener todos los medicos disponibles
             </summary>
-            <returns>retorna un listado de consultorios</returns>
+            <returns>retorna un listado de medicos disponible</returns>
         </member>
         <member name="M:Mon_GuApp.Controllers.PacienteController.GetUsers">
             <summary>
@@ -69,6 +76,13 @@
             </summary>
             <param name="data">Informacion del nuevo paciente</param>
             <returns>Si es exitoso retorna el nuevo paciente, sino retorna el error</returns>
+        </member>
+        <member name="M:Mon_GuApp.Controllers.PruebaController.SubirPrueba(Mon_GuApp.Models.DTOs.Request.SubirPruebaDTO)">
+            <summary>
+            Permite subir una prueba y almacenarla en el servidor para luego hacer la verificación
+            </summary>
+            <param name="file">Datos para subir el archivo al servidor</param>
+            <returns></returns>
         </member>
         <member name="P:Mon_GuApp.Helpers.LoggerApp.GetLogger">
             <summary>

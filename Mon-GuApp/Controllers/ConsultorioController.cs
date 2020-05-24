@@ -41,8 +41,8 @@ namespace Mon_GuApp.Controllers
         /// <summary>
         /// Obtener un consultorio
         /// </summary>
-        /// <param name="id">id del consultorio a consultaar</param>
-        /// <returns>retorna un listado de consultorio</returns>
+        /// <param name="id">id del consultorio a consultar</param>
+        /// <returns>retorna un consultorio</returns>
         [HttpGet("{id}")]
         public ActionResult<ConsultorioDTO> GetConsultorio(int id)
         {

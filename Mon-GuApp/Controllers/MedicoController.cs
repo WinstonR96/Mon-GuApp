@@ -27,7 +27,7 @@ namespace Mon_GuApp.Controllers
         /// <summary>
         /// Obtener todos los medicos disponibles
         /// </summary>
-        /// <returns>retorna un listado de consultorios</returns>
+        /// <returns>retorna un listado de medicos disponible</returns>
         [HttpGet]
         public ActionResult<List<MedicoDTO>> GetConsultorios()
         {

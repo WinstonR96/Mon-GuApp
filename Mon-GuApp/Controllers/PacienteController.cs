@@ -18,7 +18,7 @@ namespace Mon_GuApp.Controllers
     [Authorize]
     public class PacienteController: ControllerBase
     {
-        private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<AuthController>();
+        private readonly ILogger log = LoggerApp.Instance.GetLogger.ForContext<PacienteController>();
         private readonly IConfiguration _configuration;
         private readonly IPacienteService _pacienteService;
 

@@ -32,7 +32,7 @@ namespace Mon_GuApp.Controllers
         /// <summary>
         /// Obtener un paciente en atencion
         /// </summary>
-        /// <param name="id">id del consultorio a consultaar</param>
+        /// <param name="id">id del consultorio a consultar</param>
         /// <returns>retorna un paciente en consultorio</returns>
         [HttpGet("{id}")]
         public ActionResult<Paciente> GetConsultorio(int id)

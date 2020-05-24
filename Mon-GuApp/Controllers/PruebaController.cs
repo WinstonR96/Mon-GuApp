@@ -27,6 +27,12 @@ namespace Mon_GuApp.Controllers
             _pruebaService = pruebaService;
         }
 
+        /// <summary>
+        /// Permite subir una prueba y almacenarla en el servidor para luego hacer la verificación
+        /// </summary>
+        /// <param name="file">Datos para subir el archivo al servidor</param>
+        /// <returns></returns>
+
         [HttpPost]
         public ActionResult SubirPrueba([FromBody] SubirPruebaDTO file)
         {

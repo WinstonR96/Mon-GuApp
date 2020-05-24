@@ -27,7 +27,11 @@ namespace Mon_GuApp.Controllers
             _configuration = configuration;
             _authService = authService;
         }
-
+        /// <summary>
+        /// Realizar Login en el sistema
+        /// </summary>
+        /// <param name="data">Informacion para verificar</param>
+        /// <returns>Retorna Token del usuario si la verificacion es correcta</returns>
         [HttpPost]
         [Route("[action]")]
         public IActionResult Login([FromBodyAttribute] LoginRequestDTO data)
