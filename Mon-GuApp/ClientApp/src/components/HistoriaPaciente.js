@@ -73,7 +73,12 @@ export class HistoriaPaciente extends Component {
       Service.post("api/v1/prueba", data, token)
         .then((response) => {
           this.HandleSpinner();
-          console.log(response);
+          this.MostrarPanel();
+          if (response.type === "I") {
+            Util.AlertaGenericaInfo(response.message);
+          } else {
+            Util.AlertaGenericaError("No se pudo procesar la prueba");
+          }
         })
         .catch((err) => {
           this.HandleSpinner();

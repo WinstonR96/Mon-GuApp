@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Mon_GuApp.Helpers;
 using Mon_GuApp.Interfaces;
 using Mon_GuApp.Models.DTOs.Request;
+using Mon_GuApp.Models.DTOs.Response;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,29 @@ namespace Mon_GuApp.Controllers
                 var ADN_MON_GUA_V2 = _configuration.GetValue<string>("ADN_MON_GUA_V2");
                 var data = _pruebaService.SubirArchivo(file);
                 var resultado = _pruebaService.ProcesarPrueba(data, ADN_MON_GUA_V2);
+                if (resultado)
+                {
+                    return Ok(new ResponseDTO()
+                    {
+                        type = "I",
+                        message = "Positivo para Mon-Gua V2"
+                    });
+                }
+                else
+                {
+                    return Ok(new ResponseDTO()
+                    {
+                        type = "I",
+                        message = "Negativo para Mon-Gua V2"
+                    });
+                }
             }catch(Exception ex)
             {
-
+                return Ok(new ResponseDTO()
+                {
+                    type = "E",
+                    message = "Ocurrio un error procesando la prueba"
+                });
             }
             return Ok();
         }
